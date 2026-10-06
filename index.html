@@ -4,51 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learnet Institute of Skills Ranaghat | Skill Development & Training</title>
-    <meta name="description" content="Learnet Institute of Skills Ranaghat provides practical, career-focused skill development and training in Ranaghat, West Bengal. Call 7699038813.">
+    
+    <!-- Meta Description & SEO -->
+    <meta name="description" content="Learnet Institute of Skills Ranaghat provides practical, career-focused skill development and training in Ranaghat, West Bengal.">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tailwind CSS CDN for utility classes -->
+    
+    <!-- Tailwind CSS (for modern utility classes) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            blue: '#1D4ED8',
-                            dark: '#0F172A',
-                            cyan: '#06B6D4',
-                            amber: '#F59E0B'
-                        }
+                        primary: '#1D4ED8',
+                        secondary: '#0F172A',
+                        accent: '#06B6D4',
+                        highlight: '#F59E0B'
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts: Plus Jakarta Sans & Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Three.js for 3D Hero Background -->
+
+    <!-- Three.js for 3D Background -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- GSAP & ScrollTrigger for animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #0f172a;
+            background-color: #f8fafc;
             overflow-x: hidden;
-            background-color: #F8FAFC;
-            color: #0F172A;
         }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
         }
-        #three-container {
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero 3D Canvas Container */
+        #hero-canvas {
             position: absolute;
             top: 0;
             left: 0;
@@ -57,367 +68,327 @@
             z-index: 1;
             pointer-events: none;
         }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
         .glass-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #1D4ED8 0%, #3B82F6 50%, #06B6D4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hover-lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(29, 78, 216, 0.1), 0 10px 10px -5px rgba(29, 78, 216, 0.04);
         }
-        .hero-section {
-            position: relative;
-            background: linear-gradient(180deg, #EFF6FF 0%, #F8FAFC 100%);
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 text-slate-800 antialiased">
 
-    <!-- Navigation Bar -->
-    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 px-4 sm:px-8">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2.5 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform">
-                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+    <!-- Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all duration-300" id="navbar">
+        <div class="container py-3">
+            <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" href="#">
+                <div class="bg-primary text-white p-2 rounded-xl fw-bold d-flex align-items-center justify-content-center shadow-md" style="width: 42px; height: 42px;">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
                 </div>
                 <div>
-                    <span class="block font-bold text-base sm:text-lg leading-tight text-slate-900">Learnet Institute</span>
-                    <span class="block text-xs font-semibold text-blue-600 tracking-wider uppercase">Skills Ranaghat</span>
+                    <span class="fw-bold text-slate-900 fs-5 d-block leading-tight">Learnet Skills</span>
+                    <span class="text-xs text-primary fw-semibold tracking-wide">Ranaghat</span>
                 </div>
             </a>
-
-            <!-- Desktop Links -->
-            <div class="hidden lg:flex items-center gap-8 font-medium text-sm text-slate-600">
-                <a href="#home" class="hover:text-blue-600 transition-colors">Home</a>
-                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
-                <a href="#courses" class="hover:text-blue-600 transition-colors">Courses</a>
-                <a href="#why-us" class="hover:text-blue-600 transition-colors">Why Choose Us</a>
-                <a href="#reviews" class="hover:text-blue-600 transition-colors">Reviews</a>
-                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
-            </div>
-
-            <!-- CTA Buttons -->
-            <div class="hidden sm:flex items-center gap-4">
-                <a href="tel:7699038813" class="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors bg-slate-100 px-3.5 py-2 rounded-xl">
-                    <i data-lucide="phone" class="w-4 h-4 text-blue-600"></i>
-                    <span>76990-38813</span>
-                </a>
-                <button onclick="openEnquiryModal('General Enquiry')" class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-blue-600/25 transition-all hover:-translate-y-0.5">
-                    Enquire Now
-                </button>
-            </div>
-
-            <!-- Mobile Hamburger -->
-            <button class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Open Menu">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+            
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-3 my-3 my-lg-0">
+                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#why-us">Why Choose Us</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#reviews">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#contact">Contact</a></li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0 d-flex gap-2">
+                    <a href="tel:7699038813" class="btn btn-outline-primary rounded-pill px-4 fw-semibold d-flex align-items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i> Call
+                    </a>
+                    <button onclick="openEnquireModal()" class="btn btn-primary rounded-pill px-4 fw-semibold shadow-md shadow-blue-500/20 d-flex align-items-center gap-2">
+                        Enquire Now
+                    </button>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <!-- Mobile Offcanvas Menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
-        <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title font-bold flex items-center gap-2">
-                <i data-lucide="graduation-cap" class="text-blue-600 w-5 h-5"></i> Learnet Ranaghat
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body flex flex-col justify-between py-6">
-            <div class="flex flex-col gap-4 font-medium text-lg">
-                <a href="#home" data-bs-dismiss="offcanvas" class="text-slate-800 hover:text-blue-600 py-1 border-bottom">Home</a>
-                <a href="#about" data-bs-dismiss="offcanvas" class="text-slate-800 hover:text-blue-600 py-1 border-bottom">About</a>
-                <a href="#courses" data-bs-dismiss="offcanvas" class="text-slate-800 hover:text-blue-600 py-1 border-bottom">Courses</a>
-                <a href="#why-us" data-bs-dismiss="offcanvas" class="text-slate-800 hover:text-blue-600 py-1 border-bottom">Why Choose Us</a>
-                <a href="#reviews" data-bs-dismiss="offcanvas" class="text-slate-800 hover:text-blue-600 py-1 border-bottom">Reviews</a>
-                <a href="#contact" data-bs-dismiss="offcanvas" class="text-slate-800 hover:text-blue-600 py-1 border-bottom">Contact</a>
-            </div>
-            <div class="space-y-3 pt-6 border-top">
-                <a href="tel:7699038813" class="w-full flex items-center justify-center gap-2 bg-slate-100 py-3 rounded-xl font-medium text-slate-800">
-                    <i data-lucide="phone" class="w-4 h-4 text-blue-600"></i> Call 7699038813
-                </a>
-                <button onclick="openEnquiryModal('General Enquiry');" data-bs-dismiss="offcanvas" class="w-full bg-blue-600 text-white py-3 rounded-xl font-medium shadow-lg shadow-blue-600/30">
-                    Enquire Now
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section with Three.js 3D Background -->
-    <section id="home" class="hero-section min-h-screen pt-36 pb-20 relative flex items-center overflow-hidden">
-        <div id="three-container"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 bg-blue-100/90 text-blue-800 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wide shadow-sm border border-blue-200">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-500 fill-amber-500"></i>
-                        <span>Premier Skill Development & Training Institute</span>
+    <!-- Hero Section -->
+    <section id="home" class="position-relative min-vh-100 d-flex align-items-center pt-5 overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50/40 to-white">
+        <canvas id="hero-canvas"></canvas>
+        <div class="container hero-content py-5 mt-5">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <div class="d-inline-flex align-items-center gap-2 bg-blue-100 text-primary px-3 py-1.5 rounded-full text-sm fw-semibold mb-4 reveal">
+                        <span class="badge bg-primary rounded-full p-1">⭐</span>
+                        <span>4.9/5 Rating (72+ Reviews)</span>
                     </div>
-
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-                        Build Skills. <br class="hidden sm:inline">
-                        <span class="gradient-text">Build Your Future.</span>
+                    <h1 class="display-4 fw-bold text-slate-900 mb-4 tracking-tight reveal" style="transition-delay: 0.1s;">
+                        Build Skills. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-600">Build Your Future.</span>
                     </h1>
-
-                    <div class="space-y-2">
-                        <p class="text-lg sm:text-xl font-bold text-slate-800">Learnet Institute of Skills Ranaghat</p>
-                        <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                            Learn practical skills, gain confidence, and prepare yourself for better career opportunities with professional training at Learnet Institute of Skills.
-                        </p>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                        <a href="#courses" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl shadow-xl shadow-blue-600/30 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-3 group">
-                            <span>Explore Courses</span>
-                            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    <p class="fs-5 text-slate-600 mb-5 reveal" style="transition-delay: 0.2s;">
+                        Learnet Institute of Skills Ranaghat — Learn practical skills, gain confidence, and prepare yourself for better career opportunities with professional training.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 reveal" style="transition-delay: 0.3s;">
+                        <a href="#courses" class="btn btn-primary btn-lg rounded-pill px-4 py-3 fw-semibold shadow-lg shadow-blue-500/25 d-flex align-items-center gap-2">
+                            Explore Courses <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         </a>
-                        <a href="#contact" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 font-semibold px-8 py-4 rounded-xl border border-slate-300 shadow-sm transition-all hover:border-slate-400 flex items-center justify-center gap-2">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-blue-600"></i>
-                            <span>Contact Us</span>
+                        <a href="#contact" class="btn btn-white btn-lg rounded-pill px-4 py-3 fw-semibold border border-slate-200 text-slate-700 hover:bg-slate-50 transition">
+                            Contact Us
                         </a>
                     </div>
-
-                    <div class="pt-6 flex items-center justify-center lg:justify-start">
-                        <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-200 px-4 py-2.5 rounded-xl shadow-sm">
-                            <div class="flex text-amber-500">
-                                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                            </div>
-                            <span class="font-bold text-slate-900 ml-1 text-sm">4.9 / 5</span>
-                            <span class="text-slate-500 text-xs ml-1">(72+ Google Reviews)</span>
+                    
+                    <!-- Quick Trust Badges -->
+                    <div class="row g-4 mt-5 pt-4 border-top border-slate-200/60 reveal" style="transition-delay: 0.4s;">
+                        <div class="col-4 text-center text-lg-start">
+                            <h3 class="fw-bold text-slate-900 fs-4 mb-0">100%</h3>
+                            <p class="text-xs text-slate-500 mb-0 uppercase tracking-wider font-semibold">Skill-Focused</p>
+                        </div>
+                        <div class="col-4 text-center text-lg-start">
+                            <h3 class="fw-bold text-slate-900 fs-4 mb-0">4.9 / 5</h3>
+                            <p class="text-xs text-slate-500 mb-0 uppercase tracking-wider font-semibold">Student Rating</p>
+                        </div>
+                        <div class="col-4 text-center text-lg-start">
+                            <h3 class="fw-bold text-slate-900 fs-4 mb-0">Practical</h3>
+                            <p class="text-xs text-slate-500 mb-0 uppercase tracking-wider font-semibold">Training Approach</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 relative">
-                    <div class="glass-card p-6 sm:p-8 rounded-3xl shadow-2xl relative z-10 space-y-6">
-                        <div class="flex items-center justify-between border-bottom pb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-600/30">
-                                    <i data-lucide="award" class="w-6 h-6"></i>
+                <div class="col-lg-5">
+                    <div class="position-relative reveal" style="transition-delay: 0.2s;">
+                        <div class="glass-card p-4 rounded-3 shadow-xl position-relative z-2">
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div class="bg-primary/10 text-primary p-3 rounded-2">
+                                    <i data-lucide="award" class="w-8 h-8"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-slate-900 text-base">Expert Training Hub</h3>
-                                    <p class="text-xs text-slate-500">Ranaghat, West Bengal</p>
+                                    <h5 class="fw-bold text-slate-900 mb-1">Professional Training</h5>
+                                    <p class="text-sm text-slate-500 mb-0">Ranaghat, West Bengal</p>
                                 </div>
                             </div>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Verified</span>
+                            <ul class="list-unstyled space-y-3 mb-4">
+                                <li class="d-flex align-items-center gap-2 text-slate-700 text-sm">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> Career-Oriented Skill Development
+                                </li>
+                                <li class="d-flex align-items-center gap-2 text-slate-700 text-sm">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> Practical Learning Environment
+                                </li>
+                                <li class="d-flex align-items-center gap-2 text-slate-700 text-sm">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> Experienced Student Guidance
+                                </li>
+                            </ul>
+                            <button onclick="openEnquireModal()" class="btn btn-primary w-100 rounded-xl fw-semibold py-2.5">
+                                Enquire for Batch Details
+                            </button>
                         </div>
-
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border">
-                                <div class="p-2 bg-blue-100 text-blue-700 rounded-xl mt-0.5">
-                                    <i data-lucide="target" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-slate-900 text-sm">Practical Skill Focus</h4>
-                                    <p class="text-xs text-slate-600 mt-0.5">Hands-on learning tailored for real career growth and professional confidence.</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border">
-                                <div class="p-2 bg-cyan-100 text-cyan-700 rounded-xl mt-0.5">
-                                    <i data-lucide="users" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-slate-900 text-sm">Supportive Environment</h4>
-                                    <p class="text-xs text-slate-600 mt-0.5">Guidance designed around student understanding and holistic skill development.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button onclick="openEnquiryModal('Professional Skill Training')" class="w-full bg-slate-900 hover:bg-blue-600 text-white font-medium py-3 rounded-xl text-sm transition-colors flex items-center justify-center gap-2 shadow-md">
-                            <span>Book Free Consultation</span>
-                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                        </button>
+                        <!-- Decorative background glow -->
+                        <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 bg-blue-400/20 rounded-full blur-3xl -z-1"></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Trust Stats Section -->
-    <section class="py-12 bg-white border-y border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="p-6 rounded-2xl bg-slate-50 border hover:border-blue-200 transition-all hover:shadow-lg">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 flex items-center justify-center gap-1">
-                        <span>4.9</span>
-                        <span class="text-amber-500 text-2xl">★</span>
+    <!-- Trust / Stats Section -->
+    <section class="py-5 bg-white border-y border-slate-100">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-3 col-6 reveal">
+                    <div class="p-4 rounded-2 bg-slate-50 hover-lift">
+                        <h2 class="display-6 fw-bold text-primary mb-1">4.9 / 5</h2>
+                        <p class="text-slate-600 mb-0 text-sm fw-semibold">Student Rating</p>
                     </div>
-                    <p class="text-sm font-semibold text-slate-800 mt-2">Student Rating</p>
-                    <p class="text-xs text-slate-500 mt-0.5">Based on verified reviews</p>
                 </div>
-                <div class="p-6 rounded-2xl bg-slate-50 border hover:border-blue-200 transition-all hover:shadow-lg">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-slate-900">72+</div>
-                    <p class="text-sm font-semibold text-slate-800 mt-2">Google Reviews</p>
-                    <p class="text-xs text-slate-500 mt-0.5">Trusted by local learners</p>
+                <div class="col-md-3 col-6 reveal" style="transition-delay: 0.1s;">
+                    <div class="p-4 rounded-2 bg-slate-50 hover-lift">
+                        <h2 class="display-6 fw-bold text-primary mb-1">72+</h2>
+                        <p class="text-slate-600 mb-0 text-sm fw-semibold">Verified Reviews</p>
+                    </div>
                 </div>
-                <div class="p-6 rounded-2xl bg-slate-50 border hover:border-blue-200 transition-all hover:shadow-lg">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-blue-600">100%</div>
-                    <p class="text-sm font-semibold text-slate-800 mt-2">Skill-Focused</p>
-                    <p class="text-xs text-slate-500 mt-0.5">Practical oriented training</p>
+                <div class="col-md-3 col-6 reveal" style="transition-delay: 0.2s;">
+                    <div class="p-4 rounded-2 bg-slate-50 hover-lift">
+                        <h2 class="display-6 fw-bold text-primary mb-1">100%</h2>
+                        <p class="text-slate-600 mb-0 text-sm fw-semibold">Skill-Focused Learning</p>
+                    </div>
                 </div>
-                <div class="p-6 rounded-2xl bg-slate-50 border hover:border-blue-200 transition-all hover:shadow-lg">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-slate-900">Career</div>
-                    <p class="text-sm font-semibold text-slate-800 mt-2">Practical Training</p>
-                    <p class="text-xs text-slate-500 mt-0.5">Built for better opportunities</p>
+                <div class="col-md-3 col-6 reveal" style="transition-delay: 0.3s;">
+                    <div class="p-4 rounded-2 bg-slate-50 hover-lift">
+                        <h2 class="display-6 fw-bold text-primary mb-1">Ready</h2>
+                        <p class="text-slate-600 mb-0 text-sm fw-semibold">Practical Training</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 lg:py-28 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                <div class="lg:col-span-6 relative">
-                    <div class="relative mx-auto max-w-lg">
-                        <div class="bg-white p-3 rounded-3xl shadow-xl border overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Learnet Institute Classroom" class="w-full h-80 sm:h-96 object-cover rounded-2xl">
-                        </div>
-                        <div class="absolute bottom-6 left-6 bg-slate-900/90 text-white p-5 rounded-2xl shadow-xl max-w-xs backdrop-blur-md">
-                            <div class="flex items-center gap-3">
-                                <div class="p-2.5 bg-blue-600 rounded-xl">
-                                    <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+    <section id="about" class="py-5 py-lg-7 bg-slate-50">
+        <div class="container py-4">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-6 reveal">
+                    <div class="position-relative">
+                        <div class="bg-gradient-to-tr from-primary to-cyan-500 rounded-3 p-4 p-lg-5 text-white shadow-xl">
+                            <span class="badge bg-white/20 text-white mb-3 px-3 py-1 rounded-pill">About Learnet Skills</span>
+                            <h2 class="fw-bold mb-4 fs-2">Empowering Learners With Practical Skills</h2>
+                            <p class="opacity-90 mb-4 leading-relaxed">
+                                Learnet Institute of Skills Ranaghat focuses on helping students and learners develop useful skills and confidence for their careers through structured, hands-on training.
+                            </p>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-white/10 p-3 rounded-2">
+                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-slate-300 font-medium">Professional Guidance</p>
-                                    <p class="text-sm font-bold text-white">Empowering Learners Daily</p>
+                                    <h6 class="fw-bold mb-0">Ranaghat, West Bengal</h6>
+                                    <small class="opacity-80">Near Surendra Cinema Hall, 741201</small>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="lg:col-span-6 space-y-6">
-                    <span class="bg-blue-100 text-blue-800 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide">ABOUT LEARNET INSTITUTE</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                        Empowering Learners With Practical Skills
-                    </h2>
-                    <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
-                        Learnet Institute of Skills Ranaghat focuses on helping students and learners develop useful skills and confidence for their careers. In today's competitive environment, practical capability makes all the difference.
+                <div class="col-lg-6 ps-lg-5 reveal" style="transition-delay: 0.2s;">
+                    <h6 class="text-primary fw-bold text-uppercase tracking-wider mb-2">Our Core Focus</h6>
+                    <h3 class="display-6 fw-bold text-slate-900 mb-4">Building a Strong Foundation for Your Professional Future</h3>
+                    <p class="text-slate-600 mb-4">
+                        We believe in practical learning that empowers individuals with industry-relevant skills, professional guidance, and absolute confidence.
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border shadow-sm">
-                            <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5"></i>
-                            <div>
-                                <h4 class="font-semibold text-slate-900 text-sm">Practical Learning</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">Hands-on exercises & real tasks.</p>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary mt-1 flex-shrink-0"></i>
+                                <span class="text-slate-700 fw-semibold text-sm">Practical Learning</span>
                             </div>
                         </div>
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border shadow-sm">
-                            <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5"></i>
-                            <div>
-                                <h4 class="font-semibold text-slate-900 text-sm">Skill Development</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">Structured modules for capability.</p>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary mt-1 flex-shrink-0"></i>
+                                <span class="text-slate-700 fw-semibold text-sm">Skill Development</span>
                             </div>
                         </div>
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border shadow-sm">
-                            <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5"></i>
-                            <div>
-                                <h4 class="font-semibold text-slate-900 text-sm">Professional Guidance</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">Expert mentors supporting you.</p>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary mt-1 flex-shrink-0"></i>
+                                <span class="text-slate-700 fw-semibold text-sm">Career-Oriented Education</span>
                             </div>
                         </div>
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border shadow-sm">
-                            <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5"></i>
-                            <div>
-                                <h4 class="font-semibold text-slate-900 text-sm">Supportive Environment</h4>
-                                <p class="text-xs text-slate-500 mt-0.5">Comfortable space for student growth.</p>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary mt-1 flex-shrink-0"></i>
+                                <span class="text-slate-700 fw-semibold text-sm">Supportive Environment</span>
                             </div>
                         </div>
                     </div>
+
+                    <button onclick="openEnquireModal()" class="btn btn-outline-primary rounded-pill px-4 fw-semibold">
+                        Learn More About Us
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Courses Section -->
-    <section id="courses" class="py-20 lg:py-28 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="bg-blue-100 text-blue-800 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">OUR PROGRAMS</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Professional Training & Skill Courses</h2>
-                <p class="text-slate-600 text-base sm:text-lg">Explore our structured training programs designed to build knowledge and practical capability.</p>
+    <!-- Courses / Training Section -->
+    <section id="courses" class="py-5 py-lg-7 bg-white">
+        <div class="container py-4">
+            <div class="text-center max-w-2xl mx-auto mb-5 reveal">
+                <span class="badge bg-blue-100 text-primary px-3 py-1 rounded-pill fw-semibold mb-2">Our Training Programs</span>
+                <h2 class="display-6 fw-bold text-slate-900 mb-3">Professional Skill Courses</h2>
+                <p class="text-slate-600">Develop practical skills designed for today's career environment with structured guidance.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Course 1 -->
-                <div class="bg-slate-50 hover:bg-white border hover:border-blue-400 p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-blue-100 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors mb-6">
-                            <i data-lucide="book-open" class="w-7 h-7"></i>
+            <div class="row g-4">
+                <!-- Course Card 1 -->
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="glass-card p-4 rounded-3 h-100 hover-lift d-flex flex-column justify-content-between border border-slate-100 shadow-sm">
+                        <div>
+                            <div class="bg-blue-100 text-primary p-3 rounded-2 d-inline-block mb-3">
+                                <i data-lucide="briefcase" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="fw-bold text-slate-900 fs-5 mb-2">Professional Skill Training</h4>
+                            <p class="text-slate-600 text-sm mb-4">Develop practical skills designed for today's career environment and workplace demands.</p>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Professional Skill Training</h3>
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">Develop practical skills designed for today's competitive career environment with focused instruction.</p>
-                    </div>
-                    <div class="pt-6 border-t mt-6 flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-500 uppercase">Modular Training</span>
-                        <button onclick="openEnquiryModal('Professional Skill Training')" class="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600">
-                            <span>Enquire</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        <button onclick="openEnquireModal()" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-semibold">
+                            Enquire Now
                         </button>
                     </div>
                 </div>
 
-                <!-- Course 2 -->
-                <div class="bg-slate-50 hover:bg-white border hover:border-blue-400 p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-100 group-hover:bg-indigo-600 text-indigo-600 group-hover:text-white flex items-center justify-center transition-colors mb-6">
-                            <i data-lucide="target" class="w-7 h-7"></i>
+                <!-- Course Card 2 -->
+                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.1s;">
+                    <div class="glass-card p-4 rounded-3 h-100 hover-lift d-flex flex-column justify-content-between border border-slate-100 shadow-sm">
+                        <div>
+                            <div class="bg-cyan-100 text-cyan-700 p-3 rounded-2 d-inline-block mb-3">
+                                <i data-lucide="target" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="fw-bold text-slate-900 fs-5 mb-2">Career-Focused Learning</h4>
+                            <p class="text-slate-600 text-sm mb-4">Build knowledge and confidence that can help you move toward your personal career goals.</p>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Career-Focused Learning</h3>
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">Build knowledge and confidence that can help you move toward your professional career goals effectively.</p>
-                    </div>
-                    <div class="pt-6 border-t mt-6 flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-500 uppercase">Goal Oriented</span>
-                        <button onclick="openEnquiryModal('Career-Focused Learning')" class="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-600">
-                            <span>Enquire</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        <button onclick="openEnquireModal()" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-semibold">
+                            Enquire Now
                         </button>
                     </div>
                 </div>
 
-                <!-- Course 3 -->
-                <div class="bg-slate-50 hover:bg-white border hover:border-blue-400 p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-100 group-hover:bg-cyan-600 text-cyan-600 group-hover:text-white flex items-center justify-center transition-colors mb-6">
-                            <i data-lucide="compass" class="w-7 h-7"></i>
+                <!-- Course Card 3 -->
+                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.2s;">
+                    <div class="glass-card p-4 rounded-3 h-100 hover-lift d-flex flex-column justify-content-between border border-slate-100 shadow-sm">
+                        <div>
+                            <div class="bg-amber-100 text-amber-700 p-3 rounded-2 d-inline-block mb-3">
+                                <i data-lucide="cpu" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="fw-bold text-slate-900 fs-5 mb-2">Practical Learning</h4>
+                            <p class="text-slate-600 text-sm mb-4">Focus on useful, application-oriented learning instead of theoretical knowledge alone.</p>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-cyan-600 transition-colors">Practical Learning</h3>
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">Focus on useful, application-oriented learning experiences instead of relying on theory alone.</p>
-                    </div>
-                    <div class="pt-6 border-t mt-6 flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-500 uppercase">Hands-on Tasks</span>
-                        <button onclick="openEnquiryModal('Practical Learning')" class="inline-flex items-center gap-1.5 text-sm font-bold text-cyan-600">
-                            <span>Enquire</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        <button onclick="openEnquireModal()" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-semibold">
+                            Enquire Now
                         </button>
                     </div>
                 </div>
 
-                <!-- Course 4 -->
-                <div class="bg-slate-50 hover:bg-white border hover:border-blue-400 p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-amber-100 group-hover:bg-amber-600 text-amber-600 group-hover:text-white flex items-center justify-center transition-colors mb-6">
-                            <i data-lucide="award" class="w-7 h-7"></i>
+                <!-- Course Card 4 -->
+                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.3s;">
+                    <div class="glass-card p-4 rounded-3 h-100 hover-lift d-flex flex-column justify-content-between border border-slate-100 shadow-sm">
+                        <div>
+                            <div class="bg-indigo-100 text-indigo-700 p-3 rounded-2 d-inline-block mb-3">
+                                <i data-lucide="trending-up" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="fw-bold text-slate-900 fs-5 mb-2">Skill Development Programs</h4>
+                            <p class="text-slate-600 text-sm mb-4">Structured learning designed around developing valuable, market-ready skills.</p>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-amber-600 transition-colors">Skill Development Programs</h3>
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">Structured learning programs designed around developing valuable competencies for modern learners.</p>
-                    </div>
-                    <div class="pt-6 border-t mt-6 flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-500 uppercase">Structured Path</span>
-                        <button onclick="openEnquiryModal('Skill Development Programs')" class="inline-flex items-center gap-1.5 text-sm font-bold text-amber-600">
-                            <span>Enquire</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        <button onclick="openEnquireModal()" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-semibold">
+                            Enquire Now
                         </button>
                     </div>
                 </div>
@@ -426,567 +397,523 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section id="why-us" class="py-20 lg:py-28 bg-slate-900 text-white relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="bg-blue-900 text-cyan-300 border border-blue-700 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">THE LEARNET ADVANTAGE</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Why Choose Learnet Institute of Skills?</h2>
-                <p class="text-slate-300 text-base sm:text-lg">We provide a supportive, practical learning environment built around student success.</p>
+    <section id="why-us" class="py-5 py-lg-7 bg-slate-50">
+        <div class="container py-4">
+            <div class="text-center max-w-2xl mx-auto mb-5 reveal">
+                <span class="badge bg-blue-100 text-primary px-3 py-1 rounded-pill fw-semibold mb-2">Our Advantages</span>
+                <h2 class="display-6 fw-bold text-slate-900 mb-3">Why Choose Learnet Institute of Skills?</h2>
+                <p class="text-slate-600">Discover what makes our training approach trusted by learners in Ranaghat.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-slate-800 border border-slate-700 p-8 rounded-3xl hover:border-blue-500 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-600/20 text-blue-400 flex items-center justify-center mb-6">
-                        <i data-lucide="target" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Practical Learning</h3>
-                    <p class="text-slate-400 text-sm">Focus on skills that can be applied directly in real-world situations, building confidence.</p>
-                </div>
-
-                <div class="bg-slate-800 border border-slate-700 p-8 rounded-3xl hover:border-blue-500 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center mb-6">
-                        <i data-lucide="users" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Experienced Guidance</h3>
-                    <p class="text-slate-400 text-sm">Learn with structured guidance and dedicated support from experienced educators.</p>
-                </div>
-
-                <div class="bg-slate-800 border border-slate-700 p-8 rounded-3xl hover:border-blue-500 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center mb-6">
-                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Student-Focused Approach</h3>
-                    <p class="text-slate-400 text-sm">Every program is designed around individual student development and pace.</p>
-                </div>
-
-                <div class="bg-slate-800 border border-slate-700 p-8 rounded-3xl hover:border-blue-500 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-600/20 text-amber-400 flex items-center justify-center mb-6">
-                        <i data-lucide="award" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Career-Oriented Skills</h3>
-                    <p class="text-slate-400 text-sm">Develop useful skills and professional competencies that strongly support your future career.</p>
-                </div>
-
-                <div class="bg-slate-800 border border-slate-700 p-8 rounded-3xl hover:border-blue-500 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center mb-6">
-                        <i data-lucide="shield-check" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Supportive Environment</h3>
-                    <p class="text-slate-400 text-sm">A comfortable, encouraging environment designed for continuous learning and success.</p>
-                </div>
-
-                <div class="bg-slate-800 border border-slate-700 p-8 rounded-3xl hover:border-blue-500 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center mb-6">
-                        <i data-lucide="sparkles" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Modern Learning</h3>
-                    <p class="text-slate-400 text-sm">A contemporary, fresh approach to skill development tailored for today's dynamic world.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Learning Journey Timeline -->
-    <section class="py-20 lg:py-28 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="bg-blue-100 text-blue-800 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">YOUR JOURNEY</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">The Learning Experience at Learnet Skills</h2>
-                <p class="text-slate-600 text-base sm:text-lg">A structured 4-step pathway designed to take you from fundamentals to career readiness.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white p-8 rounded-3xl border shadow-sm relative group hover:border-blue-500 transition-all">
-                    <div class="text-4xl font-black text-blue-600/20 mb-4">01</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">Learn</h3>
-                    <p class="text-slate-600 text-sm">Understand the fundamentals thoroughly with structured guidance.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl border shadow-sm relative group hover:border-blue-500 transition-all">
-                    <div class="text-4xl font-black text-blue-600/20 mb-4">02</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">Practice</h3>
-                    <p class="text-slate-600 text-sm">Apply what you learn through practical activities and tasks.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl border shadow-sm relative group hover:border-blue-500 transition-all">
-                    <div class="text-4xl font-black text-blue-600/20 mb-4">03</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">Improve</h3>
-                    <p class="text-slate-600 text-sm">Build confidence and proficiency through continuous feedback.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl border shadow-sm relative group hover:border-blue-500 transition-all">
-                    <div class="text-4xl font-black text-blue-600/20 mb-4">04</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">Grow</h3>
-                    <p class="text-slate-600 text-sm">Use your newly developed skills to move toward your career goals.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="py-20 lg:py-28 bg-white border-t">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                <div class="space-y-4 max-w-2xl">
-                    <span class="bg-amber-100 text-amber-800 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">STUDENT TESTIMONIALS</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Trusted by Learners in Ranaghat</h2>
-                    <p class="text-slate-600 text-base">Read what our students have to say about their learning experience.</p>
-                </div>
-                <div class="bg-slate-50 border p-5 rounded-2xl flex items-center gap-4">
-                    <div class="text-3xl font-extrabold text-slate-900">4.9</div>
-                    <div>
-                        <div class="flex text-amber-500">
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
+                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
+                            <i data-lucide="check-circle" class="w-6 h-6"></i>
                         </div>
-                        <p class="text-xs font-semibold text-slate-600 mt-1">Based on 72 Google Reviews</p>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Practical Learning</h4>
+                        <p class="text-slate-600 text-sm mb-0">Focus on skills that can be applied directly in real-world scenarios.</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-slate-50 border p-8 rounded-3xl flex flex-col justify-between shadow-sm">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-500">
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.1s;">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
+                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
+                            <i data-lucide="users" class="w-6 h-6"></i>
                         </div>
-                        <p class="text-slate-700 italic text-sm leading-relaxed">"The practical training approach and supportive guidance at Learnet Institute of Skills made all the difference for my learning confidence. Highly recommended!"</p>
-                    </div>
-                    <div class="pt-6 border-t mt-6 flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-sm">A</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-sm">Anirban Roy</h4>
-                            <p class="text-xs text-slate-500">Ranaghat Student</p>
-                        </div>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Experienced Guidance</h4>
+                        <p class="text-slate-600 text-sm mb-0">Learn with structured guidance and supportive mentorship.</p>
                     </div>
                 </div>
-
-                <div class="bg-slate-50 border p-8 rounded-3xl flex flex-col justify-between shadow-sm">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-500">
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.2s;">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
+                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
+                            <i data-lucide="heart" class="w-6 h-6"></i>
                         </div>
-                        <p class="text-slate-700 italic text-sm leading-relaxed">"Very professional environment near Surendra Cinema Hall. The teachers are extremely helpful and focus genuinely on skill development."</p>
-                    </div>
-                    <div class="pt-6 border-t mt-6 flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">P</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-sm">Priyanka Biswas</h4>
-                            <p class="text-xs text-slate-500">Trainee</p>
-                        </div>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Student-Focused Approach</h4>
+                        <p class="text-slate-600 text-sm mb-0">Learning designed around student development and comprehension.</p>
                     </div>
                 </div>
-
-                <div class="bg-slate-50 border p-8 rounded-3xl flex flex-col justify-between shadow-sm">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-500">
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.3s;">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
+                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
+                            <i data-lucide="award" class="w-6 h-6"></i>
                         </div>
-                        <p class="text-slate-700 italic text-sm leading-relaxed">"Great coaching institute with modern teaching methods and excellent focus on career-oriented practical skills. Outstanding faculty."</p>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Career-Oriented Skills</h4>
+                        <p class="text-slate-600 text-sm mb-0">Develop useful skills that support future career opportunities.</p>
                     </div>
-                    <div class="pt-6 border-t mt-6 flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-cyan-600 text-white font-bold flex items-center justify-center text-sm">S</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-sm">Subham Ghosh</h4>
-                            <p class="text-xs text-slate-500">Skill Development Student</p>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.4s;">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
+                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
+                            <i data-lucide="shield" class="w-6 h-6"></i>
                         </div>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Supportive Environment</h4>
+                        <p class="text-slate-600 text-sm mb-0">Create a comfortable environment for learning and growth.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.5s;">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
+                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Modern Learning</h4>
+                        <p class="text-slate-600 text-sm mb-0">A contemporary approach to skill enhancement and training.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact & Location Section -->
-    <section id="contact" class="py-20 lg:py-28 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="bg-blue-100 text-blue-800 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">GET IN TOUCH</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Connect With Learnet Ranaghat</h2>
-                <p class="text-slate-600 text-base sm:text-lg">Have questions about our training programs or location? Reach out to us today.</p>
+    <!-- Learning Experience Section -->
+    <section class="py-5 py-lg-7 bg-white">
+        <div class="container py-4">
+            <div class="text-center max-w-2xl mx-auto mb-5 reveal">
+                <span class="badge bg-blue-100 text-primary px-3 py-1 rounded-pill fw-semibold mb-2">Step-by-Step Pathway</span>
+                <h2 class="display-6 fw-bold text-slate-900 mb-3">The Learning Experience at Learnet Skills</h2>
+                <p class="text-slate-600">A structured 4-step pathway designed to take you from fundamentals to career readiness.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <div class="lg:col-span-5 space-y-8">
-                    <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-6">
-                        <h3 class="text-xl font-bold text-slate-900 border-b pb-4">Contact Information</h3>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="p-4 rounded-3 bg-slate-50 border border-slate-100 h-100 relative">
+                        <span class="text-primary fw-extrabold fs-2 opacity-25 d-block mb-2">01</span>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Learn</h4>
+                        <p class="text-slate-600 text-sm mb-0">Understand the fundamentals with structured guidance from mentors.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.1s;">
+                    <div class="p-4 rounded-3 bg-slate-50 border border-slate-100 h-100 relative">
+                        <span class="text-primary fw-extrabold fs-2 opacity-25 d-block mb-2">02</span>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Practice</h4>
+                        <p class="text-slate-600 text-sm mb-0">Apply what you learn through practical activities and exercises.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.2s;">
+                    <div class="p-4 rounded-3 bg-slate-50 border border-slate-100 h-100 relative">
+                        <span class="text-primary fw-extrabold fs-2 opacity-25 d-block mb-2">03</span>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Improve</h4>
+                        <p class="text-slate-600 text-sm mb-0">Build confidence through continuous learning and feedback.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.3s;">
+                    <div class="p-4 rounded-3 bg-slate-50 border border-slate-100 h-100 relative">
+                        <span class="text-primary fw-extrabold fs-2 opacity-25 d-block mb-2">04</span>
+                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Grow</h4>
+                        <p class="text-slate-600 text-sm mb-0">Use your newly developed skills to move toward your career goals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="reviews" class="py-5 py-lg-7 bg-slate-50">
+        <div class="container py-4">
+            <div class="text-center max-w-2xl mx-auto mb-5 reveal">
+                <div class="d-inline-flex align-items-center gap-1 bg-amber-100 text-amber-800 px-3 py-1 rounded-pill fw-semibold mb-2 text-sm">
+                    ⭐ 4.9 / 5 Rating (72 Reviews)
+                </div>
+                <h2 class="display-6 fw-bold text-slate-900 mb-3">What Students Say</h2>
+                <p class="text-slate-600">Hear from learners who have experienced our training environment.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4 reveal">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 border border-slate-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="text-amber-500 mb-3">★★★★★</div>
+                            <p class="text-slate-700 italic text-sm mb-4">"The practical approach to training here really helped me understand concepts clearly and build confidence."</p>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 pt-3 border-top border-slate-100">
+                            <div class="bg-primary/10 text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">S</div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-sm">Student Review</h6>
+                                <small class="text-slate-500">Learnet Skills Ranaghat</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 reveal" style="transition-delay: 0.1s;">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 border border-slate-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="text-amber-500 mb-3">★★★★★</div>
+                            <p class="text-slate-700 italic text-sm mb-4">"Very supportive environment and structured guidance. Ideal place for skill development in Ranaghat."</p>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 pt-3 border-top border-slate-100">
+                            <div class="bg-primary/10 text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">A</div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-sm">Student Review</h6>
+                                <small class="text-slate-500">Learnet Skills Ranaghat</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
+                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 border border-slate-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="text-amber-500 mb-3">★★★★★</div>
+                            <p class="text-slate-700 italic text-sm mb-4">"Great focus on practical learning and professional skills. Highly recommended for career-oriented training."</p>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 pt-3 border-top border-slate-100">
+                            <div class="bg-primary/10 text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">R</div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-sm">Student Review</h6>
+                                <small class="text-slate-500">Learnet Skills Ranaghat</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="py-5 bg-gradient-to-r from-primary to-cyan-600 text-white">
+        <div class="container py-4 text-center reveal">
+            <h2 class="display-6 fw-bold mb-3">Ready to Build Your Skills?</h2>
+            <p class="fs-5 opacity-90 max-w-xl mx-auto mb-4">Take the next step toward learning practical skills and building a stronger future.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <button onclick="openEnquireModal()" class="btn btn-white text-primary btn-lg rounded-pill px-4 fw-bold shadow-lg">
+                    Enquire Now
+                </button>
+                <a href="tel:7699038813" class="btn btn-outline-light btn-lg rounded-pill px-4 fw-bold">
+                    Call 7699038813
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 py-lg-7 bg-white">
+        <div class="container py-4">
+            <div class="row g-5">
+                <div class="col-lg-6 reveal">
+                    <span class="badge bg-blue-100 text-primary px-3 py-1 rounded-pill fw-semibold mb-2">Get In Touch</span>
+                    <h2 class="display-6 fw-bold text-slate-900 mb-3">Visit Us or Send an Enquiry</h2>
+                    <p class="text-slate-600 mb-4">Have questions about our training programs? Reach out to us or drop by our institute in Ranaghat.</p>
+
+                    <div class="space-y-4 mb-4">
+                        <div class="d-flex align-items-start gap-3 mb-3">
+                            <div class="bg-primary/10 text-primary p-3 rounded-2">
                                 <i data-lucide="phone" class="w-6 h-6"></i>
                             </div>
                             <div>
-                                <p class="text-xs text-slate-500 font-medium uppercase">Phone Number</p>
-                                <a href="tel:7699038813" class="text-lg font-bold text-slate-900 hover:text-blue-600">7699038813</a>
-                                <p class="text-xs text-emerald-600 font-medium mt-0.5">Available for calls & WhatsApp</p>
+                                <h6 class="fw-bold text-slate-900 mb-1">Phone Number</h6>
+                                <a href="tel:7699038813" class="text-primary fw-bold text-decoration-none fs-5">7699038813</a>
                             </div>
                         </div>
 
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
+                        <div class="d-flex align-items-start gap-3 mb-3">
+                            <div class="bg-primary/10 text-primary p-3 rounded-2">
                                 <i data-lucide="map-pin" class="w-6 h-6"></i>
                             </div>
                             <div>
-                                <p class="text-xs text-slate-500 font-medium uppercase">Institute Location</p>
-                                <p class="text-base font-bold text-slate-900 mt-0.5">Ranaghat, Near Surendra Cinema Hall</p>
-                                <p class="text-sm text-slate-600">Ranaghat, India — 741201</p>
-                            </div>
-                        </div>
-
-                        <div class="pt-4 border-t">
-                            <p class="text-xs text-slate-500 font-medium uppercase mb-3">Connect on Social Media</p>
-                            <div class="flex items-center gap-3">
-                                <a href="https://www.instagram.com/learnetskills/" target="_blank" class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 hover:bg-pink-600 hover:text-white flex items-center justify-center transition-colors">
-                                    <i data-lucide="instagram" class="w-5 h-5"></i>
-                                </a>
-                                <a href="https://www.facebook.com/LearnetSkills" target="_blank" class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-colors">
-                                    <i data-lucide="facebook" class="w-5 h-5"></i>
-                                </a>
-                                <a href="https://twitter.com/learnetskills" target="_blank" class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 hover:bg-sky-600 hover:text-white flex items-center justify-center transition-colors">
-                                    <i data-lucide="twitter" class="w-5 h-5"></i>
-                                </a>
+                                <h6 class="fw-bold text-slate-900 mb-1">Location</h6>
+                                <p class="text-slate-600 mb-0">Ranaghat, Near Surendra Cinema Hall, Ranaghat, India, 741201</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-4 rounded-3xl border shadow-sm overflow-hidden">
-                        <div class="relative w-full h-64 rounded-2xl overflow-hidden bg-slate-100">
-                            <iframe title="Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3665.23456!2d88.56!3d23.17!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUmFuYWdoYXQsIFdlc3QgQmVuZ2FsIDc0MTIwMQ!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <!-- Social Media Links -->
+                    <div class="pt-3 border-top border-slate-100">
+                        <h6 class="fw-bold text-slate-900 mb-3">Connect on Social Media</h6>
+                        <div class="d-flex gap-3">
+                            <a href="https://www.instagram.com/learnetskills/" target="_blank" class="btn btn-light border text-slate-700 rounded-pill px-3 py-2 d-flex align-items-center gap-2 text-sm fw-semibold hover:bg-slate-100 transition">
+                                <i data-lucide="instagram" class="w-4 h-4 text-pink-600"></i> Instagram
+                            </a>
+                            <a href="https://www.facebook.com/LearnetSkills" target="_blank" class="btn btn-light border text-slate-700 rounded-pill px-3 py-2 d-flex align-items-center gap-2 text-sm fw-semibold hover:bg-slate-100 transition">
+                                <i data-lucide="facebook" class="w-4 h-4 text-blue-600"></i> Facebook
+                            </a>
+                            <a href="https://twitter.com/learnetskills" target="_blank" class="btn btn-light border text-slate-700 rounded-pill px-3 py-2 d-flex align-items-center gap-2 text-sm fw-semibold hover:bg-slate-100 transition">
+                                <i data-lucide="twitter" class="w-4 h-4 text-sky-500"></i> Twitter/X
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-7">
-                    <div class="bg-white p-8 sm:p-10 rounded-3xl border shadow-xl relative">
-                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Send an Enquiry</h3>
-                        <p class="text-slate-600 text-sm mb-8">Fill out the form below and our counselor will get back to you with complete details.</p>
-                        
-                        <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Your Full Name *</label>
-                                    <input type="text" id="cName" placeholder="Enter your name" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Phone Number *</label>
-                                    <input type="tel" id="cPhone" placeholder="10-digit mobile number" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
-                                </div>
+                <div class="col-lg-6 reveal" style="transition-delay: 0.2s;">
+                    <div class="bg-slate-50 p-4 p-lg-5 rounded-3 border border-slate-200 shadow-sm">
+                        <h3 class="fw-bold text-slate-900 fs-4 mb-3">Send Quick Enquiry</h3>
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                            <div class="mb-3">
+                                <label class="form-label text-sm fw-semibold text-slate-700">Full Name</label>
+                                <input type="text" class="form-control rounded-2 py-2.5" id="name" required placeholder="Enter your name">
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Email Address</label>
-                                    <input type="email" id="cEmail" placeholder="name@example.com" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Interested Course</label>
-                                    <select id="cCourse" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
-                                        <option value="Professional Skill Training">Professional Skill Training</option>
-                                        <option value="Career-Focused Learning">Career-Focused Learning</option>
-                                        <option value="Practical Learning">Practical Learning</option>
-                                        <option value="Skill Development Programs">Skill Development Programs</option>
-                                        <option value="General Enquiry">General Enquiry</option>
-                                    </select>
-                                </div>
+                            <div class="mb-3">
+                                <label class="form-label text-sm fw-semibold text-slate-700">Phone Number</label>
+                                <input type="tel" class="form-control rounded-2 py-2.5" id="phone" required placeholder="Enter phone number">
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Your Message</label>
-                                <textarea id="cMessage" rows="4" placeholder="Tell us about your learning goals..." class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+                            <div class="mb-3">
+                                <label class="form-label text-sm fw-semibold text-slate-700">Email Address</label>
+                                <input type="email" class="form-control rounded-2 py-2.5" id="email" placeholder="Enter email address">
                             </div>
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2">
-                                <i data-lucide="send" class="w-5 h-5"></i> <span>Send Enquiry</span>
+                            <div class="mb-3">
+                                <label class="form-label text-sm fw-semibold text-slate-700">Interested Program</label>
+                                <select class="form-select rounded-2 py-2.5" id="course">
+                                    <option value="Professional Skill Training">Professional Skill Training</option>
+                                    <option value="Career-Focused Learning">Career-Focused Learning</option>
+                                    <option value="Practical Learning">Practical Learning</option>
+                                    <option value="Skill Development Programs">Skill Development Programs</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label text-sm fw-semibold text-slate-700">Message / Query</label>
+                                <textarea class="form-control rounded-2 py-2" id="message" rows="3" placeholder="Write your message..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 rounded-2 py-3 fw-semibold shadow-md">
+                                Send Enquiry
                             </button>
                         </form>
+                        <div id="formSuccess" class="alert alert-success mt-3 d-none text-center" role="alert">
+                            Thank you! Your enquiry has been received successfully. We will contact you soon.
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Map / Location Section -->
+    <section class="py-4 bg-slate-50 border-top">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold text-slate-900">Find Us in Ranaghat</h3>
+                <p class="text-slate-600 text-sm">Near Surendra Cinema Hall, Ranaghat, India, 741201</p>
+            </div>
+            <div class="rounded-3 overflow-hidden shadow-sm border" style="height: 350px;">
+                <iframe width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.857039783853!2d88.5645!3d23.1752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8e79b00000001%3A0x1!2sRanaghat%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1650000000000"></iframe>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 pt-16 pb-24 md:pb-16 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
-                <div class="lg:col-span-2 space-y-4">
-                    <a href="#" class="flex items-center gap-2.5">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-md">
-                            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+    <footer class="bg-slate-900 text-white pt-5 pb-4">
+        <div class="container py-4">
+            <div class="row g-4 mb-5">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="bg-primary text-white p-2 rounded-xl fw-bold d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
                         </div>
-                        <div>
-                            <span class="block font-bold text-lg leading-tight text-white">Learnet Institute</span>
-                            <span class="block text-xs font-semibold text-cyan-400 tracking-wider uppercase">Skills Ranaghat</span>
-                        </div>
-                    </a>
-                    <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
-                        Learnet Institute of Skills Ranaghat provides practical, career-focused skill development and professional training in Ranaghat, West Bengal.
+                        <span class="fw-bold fs-5 text-white">Learnet Institute of Skills Ranaghat</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                        Empowering students and learners with practical, career-focused skill development and professional training in Ranaghat.
                     </p>
-                    <div class="flex items-center gap-3 pt-2">
-                        <a href="https://www.instagram.com/learnetskills/" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 text-slate-300 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-                        <a href="https://www.facebook.com/LearnetSkills" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 text-slate-300 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-                        <a href="https://twitter.com/learnetskills" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 text-slate-300 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    <div class="d-flex gap-2">
+                        <a href="https://www.instagram.com/learnetskills/" target="_blank" class="btn btn-dark btn-sm rounded-circle p-2 border border-slate-700 text-white hover:bg-primary"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="https://www.facebook.com/LearnetSkills" target="_blank" class="btn btn-dark btn-sm rounded-circle p-2 border border-slate-700 text-white hover:bg-primary"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                        <a href="https://twitter.com/learnetskills" target="_blank" class="btn btn-dark btn-sm rounded-circle p-2 border border-slate-700 text-white hover:bg-primary"><i data-lucide="twitter" class="w-4 h-4"></i></a>
                     </div>
                 </div>
-                <div class="space-y-4">
-                    <h4 class="text-white font-bold text-sm uppercase tracking-wider">Quick Links</h4>
-                    <ul class="space-y-2.5 text-sm">
-                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
-                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#courses" class="hover:text-white transition-colors">Courses & Training</a></li>
-                        <li><a href="#why-us" class="hover:text-white transition-colors">Why Choose Us</a></li>
-                        <li><a href="#reviews" class="hover:text-white transition-colors">Student Reviews</a></li>
-                        <li><a href="#contact" class="hover:text-white transition-colors">Contact Location</a></li>
+
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold text-white mb-3 uppercase tracking-wider text-xs">Quick Links</h6>
+                    <ul class="list-unstyled space-y-2">
+                        <li><a href="#home" class="text-slate-400 hover:text-white text-sm text-decoration-none">Home</a></li>
+                        <li><a href="#about" class="text-slate-400 hover:text-white text-sm text-decoration-none">About</a></li>
+                        <li><a href="#courses" class="text-slate-400 hover:text-white text-sm text-decoration-none">Courses</a></li>
+                        <li><a href="#why-us" class="text-slate-400 hover:text-white text-sm text-decoration-none">Why Choose Us</a></li>
                     </ul>
                 </div>
-                <div class="space-y-4">
-                    <h4 class="text-white font-bold text-sm uppercase tracking-wider">Programs</h4>
-                    <ul class="space-y-2.5 text-sm">
-                        <li><a href="#courses" class="hover:text-white transition-colors">Professional Skill Training</a></li>
-                        <li><a href="#courses" class="hover:text-white transition-colors">Career-Focused Learning</a></li>
-                        <li><a href="#courses" class="hover:text-white transition-colors">Practical Learning</a></li>
-                        <li><a href="#courses" class="hover:text-white transition-colors">Skill Development</a></li>
+
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold text-white mb-3 uppercase tracking-wider text-xs">Support</h6>
+                    <ul class="list-unstyled space-y-2">
+                        <li><a href="#reviews" class="text-slate-400 hover:text-white text-sm text-decoration-none">Reviews</a></li>
+                        <li><a href="#contact" class="text-slate-400 hover:text-white text-sm text-decoration-none">Contact Us</a></li>
+                        <li><a href="#" onclick="openEnquireModal(); return false;" class="text-slate-400 hover:text-white text-sm text-decoration-none">Enquire Now</a></li>
                     </ul>
                 </div>
-                <div class="space-y-4">
-                    <h4 class="text-white font-bold text-sm uppercase tracking-wider">Contact Info</h4>
-                    <div class="space-y-3 text-sm">
-                        <p class="flex items-start gap-2">
-                            <i data-lucide="map-pin" class="w-4 h-4 text-blue-500 shrink-0 mt-1"></i>
-                            <span>Ranaghat, Near Surendra Cinema Hall, Ranaghat, India, 741201</span>
-                        </p>
-                        <p class="flex items-center gap-2">
-                            <i data-lucide="phone" class="w-4 h-4 text-blue-500 shrink-0"></i>
-                            <a href="tel:7699038813" class="hover:text-white font-semibold text-white">7699038813</a>
-                        </p>
-                    </div>
+
+                <div class="col-lg-4">
+                    <h6 class="fw-bold text-white mb-3 uppercase tracking-wider text-xs">Contact Info</h6>
+                    <p class="text-slate-400 text-sm mb-2 d-flex align-items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4 text-primary"></i> <a href="tel:7699038813" class="text-slate-300 text-decoration-none">7699038813</a>
+                    </p>
+                    <p class="text-slate-400 text-sm mb-0 d-flex align-items-start gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-primary mt-1 flex-shrink-0"></i> Near Surendra Cinema Hall, Ranaghat, India — 741201
+                    </p>
                 </div>
             </div>
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-                <p>© 2026 Learnet Institute of Skills Ranaghat. All rights reserved.</p>
-                <div class="flex items-center gap-6">
-                    <a href="#home" class="hover:text-slate-400">Privacy Policy</a>
-                    <a href="#home" class="hover:text-slate-400">Terms of Service</a>
-                </div>
+
+            <div class="pt-4 border-top border-slate-800 text-center text-slate-500 text-sm">
+                <p class="mb-0">© 2026 Learnet Institute of Skills Ranaghat. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Mobile Floating Action Bar -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t px-4 py-3 flex items-center justify-between shadow-2xl">
-        <a href="tel:7699038813" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 mr-2 border">
-            <i data-lucide="phone" class="w-4 h-4 text-blue-600"></i> <span>Call Now</span>
+    <!-- Mobile Bottom Action Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-3 d-flex d-md-none justify-content-around align-items-center z-50 shadow-lg">
+        <a href="tel:7699038813" class="btn btn-outline-primary btn-sm rounded-pill px-4 fw-semibold d-flex align-items-center gap-2">
+            <i data-lucide="phone" class="w-4 h-4"></i> Call Now
         </a>
-        <button onclick="openEnquiryModal('Mobile Quick Enquiry')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 ml-2">
-            <i data-lucide="message-square" class="w-4 h-4"></i> <span>Enquire Now</span>
+        <button onclick="openEnquireModal()" class="btn btn-primary btn-sm rounded-pill px-4 fw-semibold d-flex align-items-center gap-2 shadow-sm">
+            <i data-lucide="message-square" class="w-4 h-4"></i> Enquire Now
         </button>
     </div>
 
     <!-- Enquiry Modal -->
-    <div class="modal fade" id="enquiryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="enquireModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-3xl p-4 border-0 shadow-2xl">
+            <div class="modal-content rounded-3 border-0 shadow-lg">
                 <div class="modal-header border-0 pb-0">
-                    <div>
-                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Quick Enquiry</span>
-                        <h3 class="text-xl font-bold text-slate-900 mt-2">Enquire About Training</h3>
-                        <p class="text-slate-600 text-xs mt-1">Course: <span id="modalCourseName" class="font-semibold text-blue-600">General</span></p>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title fw-bold text-slate-900">Enquire at Learnet Skills</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body pt-4">
-                    <form id="modalForm" onsubmit="handleModalSubmit(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Full Name *</label>
-                            <input type="text" id="mName" required placeholder="Enter your name" class="w-full px-4 py-3 rounded-xl bg-slate-50 border text-sm focus:ring-2 focus:ring-blue-600">
+                <div class="modal-body pt-3">
+                    <form id="modalForm" onsubmit="handleModalSubmit(event)">
+                        <div class="mb-3">
+                            <label class="form-label text-sm fw-semibold text-slate-700">Full Name</label>
+                            <input type="text" class="form-control rounded-2 py-2" id="modalName" required placeholder="Enter your name">
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Phone Number *</label>
-                            <input type="tel" id="mPhone" required placeholder="10-digit mobile number" class="w-full px-4 py-3 rounded-xl bg-slate-50 border text-sm focus:ring-2 focus:ring-blue-600">
+                        <div class="mb-3">
+                            <label class="form-label text-sm fw-semibold text-slate-700">Phone Number</label>
+                            <input type="tel" class="form-control rounded-2 py-2" id="modalPhone" required placeholder="Enter phone number">
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Email (Optional)</label>
-                            <input type="email" id="mEmail" placeholder="name@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-50 border text-sm focus:ring-2 focus:ring-blue-600">
+                        <div class="mb-3">
+                            <label class="form-label text-sm fw-semibold text-slate-700">Interested Course</label>
+                            <select class="form-select rounded-2 py-2" id="modalCourse">
+                                <option value="Professional Skill Training">Professional Skill Training</option>
+                                <option value="Career-Focused Learning">Career-Focused Learning</option>
+                                <option value="Practical Learning">Practical Learning</option>
+                                <option value="Skill Development Programs">Skill Development Programs</option>
+                            </select>
                         </div>
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 mt-4">
-                            <i data-lucide="send" class="w-4 h-4"></i> <span>Submit Enquiry</span>
+                        <button type="submit" class="btn btn-primary w-100 rounded-2 py-2.5 fw-semibold shadow-sm">
+                            Submit Enquiry
                         </button>
                     </form>
+                    <div id="modalSuccess" class="alert alert-success mt-3 d-none text-center text-sm" role="alert">
+                        Enquiry submitted successfully! We will contact you soon.
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Success Toast -->
-    <div id="toastNotification" class="fixed top-24 right-4 z-50 bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-slate-700 hidden">
-        <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
-        <span id="toastText" class="text-sm font-medium">Enquiry submitted successfully!</span>
     </div>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Initialize Lucide icons
+        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Three.js Interactive 3D Hero Background Animation
-        window.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('three-container');
-            if (container) {
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                container.appendChild(renderer.domElement);
+        // Scroll Reveal Observer (Fixes blank section issue completely)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
 
-                // Create particles / floating nodes
-                const particlesGeometry = new THREE.BufferGeometry();
-                const particlesCount = 200;
-                const posArray = new Float32Array(particlesCount * 3);
-
-                for(let i = 0; i < particlesCount * 3; i++) {
-                    posArray[i] = (Math.random() - 0.5) * 15;
-                }
-
-                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-                const particlesMaterial = new THREE.PointsMaterial({
-                    size: 0.03,
-                    color: 0x1D4ED8,
-                    transparent: true,
-                    opacity: 0.7
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
                 });
+            }, observerOptions);
 
-                const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-                scene.add(particlesMesh);
-
-                // Create floating 3D geometric shapes
-                const geometries = [
-                    new THREE.IcosahedronGeometry(0.5, 0),
-                    new THREE.BoxGeometry(0.6, 0.6, 0.6),
-                    new THREE.TetrahedronGeometry(0.6, 0)
-                ];
-
-                const shapes = [];
-                for(let i = 0; i < 12; i++) {
-                    const geom = geometries[Math.floor(Math.random() * geometries.length)];
-                    const mat = new THREE.MeshBasicMaterial({
-                        color: i % 2 === 0 ? 0x06B6D4 : 0x1D4ED8,
-                        wireframe: true,
-                        transparent: true,
-                        opacity: 0.25
-                    });
-                    const mesh = new THREE.Mesh(geom, mat);
-                    mesh.position.set(
-                        (Math.random() - 0.5) * 12,
-                        (Math.random() - 0.5) * 8,
-                        (Math.random() - 0.5) * 6
-                    );
-                    scene.add(mesh);
-                    shapes.push(mesh);
-                }
-
-                camera.position.z = 5;
-
-                // Mouse interaction
-                let mouseX = 0;
-                let mouseY = 0;
-                window.addEventListener('mousemove', (event) => {
-                    mouseX = (event.clientX / window.innerWidth) - 0.5;
-                    mouseY = (event.clientY / window.innerHeight) - 0.5;
-                });
-
-                // Animation loop
-                const animate = () => {
-                    requestAnimationFrame(animate);
-                    particlesMesh.rotation.y += 0.001;
-                    particlesMesh.rotation.x += 0.0005;
-
-                    shapes.forEach((shape, index) => {
-                        shape.rotation.x += 0.005 + (index * 0.0002);
-                        shape.rotation.y += 0.005 + (index * 0.0002);
-                    });
-
-                    camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
-                    camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.05;
-
-                    renderer.render(scene, camera);
-                };
-                animate();
-
-                // Window resize handler
-                window.addEventListener('resize', () => {
-                    camera.aspect = window.innerWidth / window.innerHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                });
-            }
-
-            // GSAP Scroll Animations
-            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
-                gsap.utils.toArray('section').forEach((section) => {
-                    gsap.from(section.querySelectorAll('.grid > div'), {
-                        scrollTrigger: {
-                            trigger: section,
-                            start: 'top 85%',
-                            toggleActions: 'play none none none'
-                        },
-                        y: 30,
-                        opacity: 0,
-                        duration: 0.8,
-                        stagger: 0.15,
-                        ease: 'power3.out'
-                    });
-                });
-            }
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
         });
 
-        // Enquiry Modal Handler
-        let activeModalCourse = 'General Enquiry';
-        function openEnquiryModal(courseName) {
-            activeModalCourse = courseName;
-            document.getElementById('modalCourseName').innerText = courseName;
-            const modal = new bootstrap.Modal(document.getElementById('enquiryModal'));
-            modal.show();
-        }
+        // Three.js Background Animation
+        const canvas = document.getElementById('hero-canvas');
+        if (canvas) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Form Validation & Success Toast
-        function showToast(message) {
-            const toast = document.getElementById('toastNotification');
-            document.getElementById('toastText').innerText = message;
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 4000);
-        }
+            // Particles Geometry
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 700;
+            const posArray = new Float32Array(particlesCount * 3);
 
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('cName').value.trim();
-            const phone = document.getElementById('cPhone').value.trim();
-            
-            if(!name || !phone || phone.length < 10) {
-                showToast('Please enter a valid name and 10-digit phone number.');
-                return;
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 12;
             }
 
-            showToast('Enquiry submitted successfully! We will contact you soon.');
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            // Material
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.035,
+                color: 0x1D4ED8,
+                transparent: true,
+                opacity: 0.7
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            camera.position.z = 3;
+
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+
+            window.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX / window.innerWidth - 0.5;
+                mouseY = event.clientY / window.innerHeight - 0.5;
+            });
+
+            // Animation Loop
+            const clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                particlesMesh.rotation.y = elapsedTime * 0.05 + mouseX * 0.3;
+                particlesMesh.rotation.x = elapsedTime * 0.03 + mouseY * 0.3;
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Resize Handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Modal Handler Functions
+        function openEnquireModal() {
+            const modalElement = document.getElementById('enquireModal');
+            if (modalElement) {
+                const modal = new bootstrap.Modal(modalElement);
+                modal.show();
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            document.getElementById('formSuccess').classList.remove('d-none');
             document.getElementById('contactForm').reset();
+            setTimeout(() => {
+                document.getElementById('formSuccess').classList.add('d-none');
+            }, 5000);
         }
 
-        function handleModalSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('mName').value.trim();
-            const phone = document.getElementById('mPhone').value.trim();
-
-            if(!name || !phone || phone.length < 10) {
-                alert('Please enter a valid name and 10-digit phone number.');
-                return;
-            }
-
-            const modalEl = document.getElementById('enquiryModal');
-            const modal = bootstrap.Modal.getInstance(modalEl);
-            modal.hide();
-
-            showToast('Enquiry received successfully! Our counselor will call you.');
+        function handleModalSubmit(event) {
+            event.preventDefault();
+            document.getElementById('modalSuccess').classList.remove('d-none');
             document.getElementById('modalForm').reset();
+            setTimeout(() => {
+                document.getElementById('modalSuccess').classList.add('d-none');
+                const modalEl = document.getElementById('enquireModal');
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
+            }, 3000);
         }
     </script>
 </body>
