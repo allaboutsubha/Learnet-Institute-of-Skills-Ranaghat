@@ -3,918 +3,1524 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learnet Institute of Skills Ranaghat | Skill Development & Training</title>
-    
-    <!-- Meta Description & SEO -->
-    <meta name="description" content="Learnet Institute of Skills Ranaghat provides practical, career-focused skill development and training in Ranaghat, West Bengal.">
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Tailwind CSS (for modern utility classes) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1D4ED8',
-                        secondary: '#0F172A',
-                        accent: '#06B6D4',
-                        highlight: '#F59E0B'
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Google Fonts: Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Three.js for 3D Background -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
+    <title>Learnet Institute of Skills Ranaghat | Premier Skill Development & Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --accent-light: #fffbeb;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --text-light: #94a3b8;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #0f172a;
-            background-color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Scroll Reveal Animation Classes */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, transform;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-main);
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1.5px solid var(--border);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+        .btn-sm { padding: 10px 20px; font-size: 14px; }
+
+        /* Section Styles */
+        .section { padding: 100px 0; }
+        .section-alt { background: var(--bg-alt); }
+        
+        .section-header {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 60px;
+        }
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .section-title {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        .section-desc {
+            font-size: 17px;
+            color: var(--text-sub);
+            line-height: 1.7;
         }
 
-        /* Hero 3D Canvas Container */
-        #hero-canvas {
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+        .header.scrolled {
+            border-bottom-color: var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .logo span { color: var(--primary); }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-sub);
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 15px;
+        }
+        .nav-phone i { color: var(--primary); }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--accent-light);
+            color: #b45309;
+            border: 1px solid #fde68a;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero-title {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        .hero-title .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(37, 99, 235, 0.15);
+            border-radius: 4px;
+            z-index: -1;
+        }
+        .hero-desc {
+            font-size: 18px;
+            color: var(--text-sub);
+            margin-bottom: 32px;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .trust-text strong {
+            display: block;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+        .trust-text span {
+            font-size: 13px;
+            color: var(--text-sub);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+        }
+        .hero-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), transparent);
+        }
+        .hero-float-card {
+            position: absolute;
+            background: #fff;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-float-card.card-1 {
+            top: 40px;
+            left: -30px;
+            animation-delay: 0s;
+        }
+        .hero-float-card.card-2 {
+            bottom: 60px;
+            right: -20px;
+            animation-delay: -3s;
+        }
+        .float-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .float-icon.blue { background: var(--primary-light); color: var(--primary); }
+        .float-icon.amber { background: var(--accent-light); color: var(--accent); }
+        .float-text strong { display: block; font-size: 14px; color: var(--text-main); }
+        .float-text span { font-size: 12px; color: var(--text-sub); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .about-image {
+            position: relative;
+        }
+        .about-image img {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+        }
+        .about-image-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--primary);
+            color: #fff;
+            padding: 20px 24px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+        .about-image-badge strong {
+            display: block;
+            font-size: 28px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .about-image-badge span {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        .about-content .section-badge { margin-bottom: 12px; }
+        .about-content .section-title {
+            text-align: left;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .about-content > p {
+            color: var(--text-sub);
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .about-feature {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .about-feature-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .about-feature h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .about-feature p {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin: 0;
+        }
+
+        /* Courses */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .course-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .course-card::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .course-card:hover {
+            border-color: transparent;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        .course-card:hover::before { transform: scaleX(1); }
+        
+        .course-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 24px;
+        }
+        .course-icon.blue { background: var(--primary-light); color: var(--primary); }
+        .course-icon.amber { background: var(--accent-light); color: var(--accent); }
+        .course-icon.green { background: #ecfdf5; color: #059669; }
+        .course-icon.purple { background: #f5f3ff; color: #7c3aed; }
+        
+        .course-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--bg-alt);
+            color: var(--text-sub);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        .course-card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+        .course-card p {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .course-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        .course-link:hover { gap: 10px; }
+
+        /* Advantages */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .advantage-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .advantage-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .advantage-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+        .advantage-card:hover .advantage-icon {
+            background: var(--primary);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .advantage-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .advantage-card p {
+            font-size: 14px;
+            color: var(--text-sub);
         }
 
-        .hero-content {
+        /* Journey */
+        .journey-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
             position: relative;
-            z-index: 2;
+        }
+        .journey-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: repeating-linear-gradient(
+                to right,
+                var(--border) 0,
+                var(--border) 8px,
+                transparent 8px,
+                transparent 16px
+            );
+            z-index: 0;
+        }
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border: 2px solid var(--border);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+        .step:hover .step-number {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        .step h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .step p {
+            font-size: 14px;
+            color: var(--text-sub);
+            max-width: 200px;
+            margin: 0 auto;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .testimonial-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: var(--transition);
+        }
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .testimonial-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .testimonial-info p {
+            font-size: 13px;
+            color: var(--text-sub);
+        }
+        .testimonial-stars {
+            color: var(--accent);
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 2px;
+        }
+        .testimonial-text {
+            font-size: 15px;
+            color: var(--text-sub);
+            line-height: 1.7;
+            font-style: italic;
+            position: relative;
+        }
+        .testimonial-text::before {
+            content: '\201C';
+            font-family: serif;
+            font-size: 48px;
+            color: var(--primary-light);
+            position: absolute;
+            top: -10px;
+            left: -5px;
+            line-height: 1;
         }
 
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
         }
-        .hover-lift:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 25px -5px rgba(29, 78, 216, 0.1), 0 10px 10px -5px rgba(29, 78, 216, 0.04);
+        .contact-info {
+            background: var(--text-main);
+            color: #fff;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+        }
+        .contact-info > * { position: relative; z-index: 1; }
+        .contact-info h3 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .contact-info > p {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        .contact-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            align-items: flex-start;
+        }
+        .contact-item-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-light);
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .contact-item h4 {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .contact-item p, .contact-item a {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .contact-item a:hover { color: #fff; }
+
+        .contact-form {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+        }
+        .contact-form h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .contact-form > p {
+            color: var(--text-sub);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-alt);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-main);
+            transition: var(--transition);
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
+        /* Footer */
+        .footer {
+            background: var(--text-main);
+            color: #cbd5e1;
+            padding: 80px 0 0;
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid #1e293b;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 5px;
+        .footer-col h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 20px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+        .footer-col p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        .footer-col ul li a {
+            font-size: 14px;
+            color: #94a3b8;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-col ul li a:hover {
+            color: #fff;
+            transform: translateX(4px);
+        }
+        .footer-bottom {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-bottom p {
+            font-size: 13px;
+            color: #64748b;
+        }
+        .footer-bottom a {
+            color: #94a3b8;
+            transition: var(--transition);
+        }
+        .footer-bottom a:hover { color: #fff; }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: #fff;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-sub);
+            cursor: pointer;
+        }
+        .modal h3 {
+            font-size: 22px;
+            margin-bottom: 24px;
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-title { font-size: 40px; }
+            .section-title { font-size: 32px; }
+            .journey-steps { grid-template-columns: repeat(2, 1fr); }
+            .journey-steps::before { display: none; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                padding: 24px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-md);
+            }
+            .nav-links.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .nav-phone { display: none; }
+            .hero { padding: 120px 0 60px; }
+            .hero-title { font-size: 32px; }
+            .hero-actions { flex-direction: column; }
+            .hero-trust { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .hero-float-card { display: none; }
+            .about-features { grid-template-columns: 1fr; }
+            .journey-steps { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .section { padding: 70px 0; }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body>
 
-    <!-- Sticky Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all duration-300" id="navbar">
-        <div class="container py-3">
-            <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" href="#">
-                <div class="bg-primary text-white p-2 rounded-xl fw-bold d-flex align-items-center justify-content-center shadow-md" style="width: 42px; height: 42px;">
-                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <span class="fw-bold text-slate-900 fs-5 d-block leading-tight">Learnet Skills</span>
-                    <span class="text-xs text-primary fw-semibold tracking-wide">Ranaghat</span>
-                </div>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <a href="#home" class="logo">
+                <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+                Learnet <span>Skills</span>
             </a>
-            
-            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-lg-center gap-lg-3 my-3 my-lg-0">
-                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#courses">Courses</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#why-us">Why Choose Us</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#reviews">Reviews</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold text-slate-600 hover:text-primary transition" href="#contact">Contact</a></li>
-                </ul>
-                <div class="ms-lg-3 mt-3 mt-lg-0 d-flex gap-2">
-                    <a href="tel:7699038813" class="btn btn-outline-primary rounded-pill px-4 fw-semibold d-flex align-items-center gap-2">
-                        <i data-lucide="phone" class="w-4 h-4"></i> Call
-                    </a>
-                    <button onclick="openEnquireModal()" class="btn btn-primary rounded-pill px-4 fw-semibold shadow-md shadow-blue-500/20 d-flex align-items-center gap-2">
-                        Enquire Now
-                    </button>
-                </div>
+            <nav class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#courses">Courses</a>
+                <a href="#why-us">Why Us</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="tel:7699038813" class="nav-phone">
+                    <i class="fas fa-phone"></i> 76990-38813
+                </a>
+                <button class="btn btn-primary btn-sm" onclick="openModal()">Enquire Now</button>
+                <button class="mobile-toggle" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="position-relative min-vh-100 d-flex align-items-center pt-5 overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50/40 to-white">
-        <canvas id="hero-canvas"></canvas>
-        <div class="container hero-content py-5 mt-5">
-            <div class="row align-items-center gy-5">
-                <div class="col-lg-7 text-center text-lg-start">
-                    <div class="d-inline-flex align-items-center gap-2 bg-blue-100 text-primary px-3 py-1.5 rounded-full text-sm fw-semibold mb-4 reveal">
-                        <span class="badge bg-primary rounded-full p-1">⭐</span>
-                        <span>4.9/5 Rating (72+ Reviews)</span>
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i> Premier Skill Development Institute in Ranaghat
                     </div>
-                    <h1 class="display-4 fw-bold text-slate-900 mb-4 tracking-tight reveal" style="transition-delay: 0.1s;">
-                        Build Skills. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-600">Build Your Future.</span>
+                    <h1 class="hero-title">
+                        Build Skills.<br>
+                        <span class="highlight">Build Your Future.</span>
                     </h1>
-                    <p class="fs-5 text-slate-600 mb-5 reveal" style="transition-delay: 0.2s;">
-                        Learnet Institute of Skills Ranaghat — Learn practical skills, gain confidence, and prepare yourself for better career opportunities with professional training.
+                    <p class="hero-desc">
+                        Learn practical skills, gain confidence, and prepare yourself for better career opportunities with professional training at Learnet Institute of Skills.
                     </p>
-                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 reveal" style="transition-delay: 0.3s;">
-                        <a href="#courses" class="btn btn-primary btn-lg rounded-pill px-4 py-3 fw-semibold shadow-lg shadow-blue-500/25 d-flex align-items-center gap-2">
-                            Explore Courses <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    <div class="hero-actions">
+                        <a href="#courses" class="btn btn-primary">
+                            Explore Courses <i class="fas fa-arrow-right"></i>
                         </a>
-                        <a href="#contact" class="btn btn-white btn-lg rounded-pill px-4 py-3 fw-semibold border border-slate-200 text-slate-700 hover:bg-slate-50 transition">
+                        <a href="#contact" class="btn btn-outline">
                             Contact Us
                         </a>
                     </div>
-                    
-                    <!-- Quick Trust Badges -->
-                    <div class="row g-4 mt-5 pt-4 border-top border-slate-200/60 reveal" style="transition-delay: 0.4s;">
-                        <div class="col-4 text-center text-lg-start">
-                            <h3 class="fw-bold text-slate-900 fs-4 mb-0">100%</h3>
-                            <p class="text-xs text-slate-500 mb-0 uppercase tracking-wider font-semibold">Skill-Focused</p>
+                    <div class="hero-trust">
+                        <div class="trust-item">
+                            <div class="trust-icon"><i class="fas fa-star"></i></div>
+                            <div class="trust-text">
+                                <strong>4.9 / 5</strong>
+                                <span>72+ Google Reviews</span>
+                            </div>
                         </div>
-                        <div class="col-4 text-center text-lg-start">
-                            <h3 class="fw-bold text-slate-900 fs-4 mb-0">4.9 / 5</h3>
-                            <p class="text-xs text-slate-500 mb-0 uppercase tracking-wider font-semibold">Student Rating</p>
-                        </div>
-                        <div class="col-4 text-center text-lg-start">
-                            <h3 class="fw-bold text-slate-900 fs-4 mb-0">Practical</h3>
-                            <p class="text-xs text-slate-500 mb-0 uppercase tracking-wider font-semibold">Training Approach</p>
+                        <div class="trust-item">
+                            <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
+                            <div class="trust-text">
+                                <strong>Verified</strong>
+                                <span>Expert Training Hub</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-5">
-                    <div class="position-relative reveal" style="transition-delay: 0.2s;">
-                        <div class="glass-card p-4 rounded-3 shadow-xl position-relative z-2">
-                            <div class="d-flex align-items-center gap-3 mb-4">
-                                <div class="bg-primary/10 text-primary p-3 rounded-2">
-                                    <i data-lucide="award" class="w-8 h-8"></i>
-                                </div>
-                                <div>
-                                    <h5 class="fw-bold text-slate-900 mb-1">Professional Training</h5>
-                                    <p class="text-sm text-slate-500 mb-0">Ranaghat, West Bengal</p>
-                                </div>
-                            </div>
-                            <ul class="list-unstyled space-y-3 mb-4">
-                                <li class="d-flex align-items-center gap-2 text-slate-700 text-sm">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> Career-Oriented Skill Development
-                                </li>
-                                <li class="d-flex align-items-center gap-2 text-slate-700 text-sm">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> Practical Learning Environment
-                                </li>
-                                <li class="d-flex align-items-center gap-2 text-slate-700 text-sm">
-                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> Experienced Student Guidance
-                                </li>
-                            </ul>
-                            <button onclick="openEnquireModal()" class="btn btn-primary w-100 rounded-xl fw-semibold py-2.5">
-                                Enquire for Batch Details
-                            </button>
+                <div class="hero-visual">
+                    <div class="hero-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Students Learning">
+                        <div class="hero-image-overlay"></div>
+                    </div>
+                    <div class="hero-float-card card-1">
+                        <div class="float-icon blue"><i class="fas fa-laptop-code"></i></div>
+                        <div class="float-text">
+                            <strong>Practical Focus</strong>
+                            <span>Hands-on learning</span>
                         </div>
-                        <!-- Decorative background glow -->
-                        <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 bg-blue-400/20 rounded-full blur-3xl -z-1"></div>
+                    </div>
+                    <div class="hero-float-card card-2">
+                        <div class="float-icon amber"><i class="fas fa-heart"></i></div>
+                        <div class="float-text">
+                            <strong>Supportive Environment</strong>
+                            <span>Student-centric growth</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Trust / Stats Section -->
-    <section class="py-5 bg-white border-y border-slate-100">
+    <!-- About -->
+    <section class="section section-alt" id="about">
         <div class="container">
-            <div class="row g-4 text-center">
-                <div class="col-md-3 col-6 reveal">
-                    <div class="p-4 rounded-2 bg-slate-50 hover-lift">
-                        <h2 class="display-6 fw-bold text-primary mb-1">4.9 / 5</h2>
-                        <p class="text-slate-600 mb-0 text-sm fw-semibold">Student Rating</p>
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Professional Guidance">
+                    <div class="about-image-badge">
+                        <strong>100%</strong>
+                        <span>Skill-Focused</span>
                     </div>
                 </div>
-                <div class="col-md-3 col-6 reveal" style="transition-delay: 0.1s;">
-                    <div class="p-4 rounded-2 bg-slate-50 hover-lift">
-                        <h2 class="display-6 fw-bold text-primary mb-1">72+</h2>
-                        <p class="text-slate-600 mb-0 text-sm fw-semibold">Verified Reviews</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6 reveal" style="transition-delay: 0.2s;">
-                    <div class="p-4 rounded-2 bg-slate-50 hover-lift">
-                        <h2 class="display-6 fw-bold text-primary mb-1">100%</h2>
-                        <p class="text-slate-600 mb-0 text-sm fw-semibold">Skill-Focused Learning</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6 reveal" style="transition-delay: 0.3s;">
-                    <div class="p-4 rounded-2 bg-slate-50 hover-lift">
-                        <h2 class="display-6 fw-bold text-primary mb-1">Ready</h2>
-                        <p class="text-slate-600 mb-0 text-sm fw-semibold">Practical Training</p>
+                <div class="about-content reveal reveal-delay-2">
+                    <div class="section-badge">About Learnet Institute</div>
+                    <h2 class="section-title">Empowering Learners With Practical Skills</h2>
+                    <p>Learnet Institute of Skills Ranaghat focuses on helping students and learners develop useful skills and confidence for their careers. In today's competitive environment, practical capability makes all the difference.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-laptop-code"></i></div>
+                            <div>
+                                <h4>Practical Learning</h4>
+                                <p>Hands-on exercises & real tasks.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <div>
+                                <h4>Skill Development</h4>
+                                <p>Structured modules for capability.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-user-tie"></i></div>
+                            <div>
+                                <h4>Professional Guidance</h4>
+                                <p>Expert mentors supporting you.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon"><i class="fas fa-hands-helping"></i></div>
+                            <div>
+                                <h4>Supportive Environment</h4>
+                                <p>Comfortable space for student growth.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-5 py-lg-7 bg-slate-50">
-        <div class="container py-4">
-            <div class="row align-items-center gy-5">
-                <div class="col-lg-6 reveal">
-                    <div class="position-relative">
-                        <div class="bg-gradient-to-tr from-primary to-cyan-500 rounded-3 p-4 p-lg-5 text-white shadow-xl">
-                            <span class="badge bg-white/20 text-white mb-3 px-3 py-1 rounded-pill">About Learnet Skills</span>
-                            <h2 class="fw-bold mb-4 fs-2">Empowering Learners With Practical Skills</h2>
-                            <p class="opacity-90 mb-4 leading-relaxed">
-                                Learnet Institute of Skills Ranaghat focuses on helping students and learners develop useful skills and confidence for their careers through structured, hands-on training.
-                            </p>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="bg-white/10 p-3 rounded-2">
-                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h6 class="fw-bold mb-0">Ranaghat, West Bengal</h6>
-                                    <small class="opacity-80">Near Surendra Cinema Hall, 741201</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 ps-lg-5 reveal" style="transition-delay: 0.2s;">
-                    <h6 class="text-primary fw-bold text-uppercase tracking-wider mb-2">Our Core Focus</h6>
-                    <h3 class="display-6 fw-bold text-slate-900 mb-4">Building a Strong Foundation for Your Professional Future</h3>
-                    <p class="text-slate-600 mb-4">
-                        We believe in practical learning that empowers individuals with industry-relevant skills, professional guidance, and absolute confidence.
-                    </p>
-                    
-                    <div class="row g-3 mb-4">
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-start gap-2">
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary mt-1 flex-shrink-0"></i>
-                                <span class="text-slate-700 fw-semibold text-sm">Practical Learning</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-start gap-2">
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary mt-1 flex-shrink-0"></i>
-                                <span class="text-slate-700 fw-semibold text-sm">Skill Development</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-start gap-2">
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary mt-1 flex-shrink-0"></i>
-                                <span class="text-slate-700 fw-semibold text-sm">Career-Oriented Education</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-start gap-2">
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary mt-1 flex-shrink-0"></i>
-                                <span class="text-slate-700 fw-semibold text-sm">Supportive Environment</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button onclick="openEnquireModal()" class="btn btn-outline-primary rounded-pill px-4 fw-semibold">
-                        Learn More About Us
-                    </button>
-                </div>
+    <!-- Courses -->
+    <section class="section" id="courses">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge">Our Programs</div>
+                <h2 class="section-title">Professional Training & Skill Courses</h2>
+                <p class="section-desc">Explore our structured training programs designed to build knowledge and practical capability.</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Courses / Training Section -->
-    <section id="courses" class="py-5 py-lg-7 bg-white">
-        <div class="container py-4">
-            <div class="text-center max-w-2xl mx-auto mb-5 reveal">
-                <span class="badge bg-blue-100 text-primary px-3 py-1 rounded-pill fw-semibold mb-2">Our Training Programs</span>
-                <h2 class="display-6 fw-bold text-slate-900 mb-3">Professional Skill Courses</h2>
-                <p class="text-slate-600">Develop practical skills designed for today's career environment with structured guidance.</p>
-            </div>
-
-            <div class="row g-4">
-                <!-- Course Card 1 -->
-                <div class="col-md-6 col-lg-3 reveal">
-                    <div class="glass-card p-4 rounded-3 h-100 hover-lift d-flex flex-column justify-content-between border border-slate-100 shadow-sm">
-                        <div>
-                            <div class="bg-blue-100 text-primary p-3 rounded-2 d-inline-block mb-3">
-                                <i data-lucide="briefcase" class="w-6 h-6"></i>
-                            </div>
-                            <h4 class="fw-bold text-slate-900 fs-5 mb-2">Professional Skill Training</h4>
-                            <p class="text-slate-600 text-sm mb-4">Develop practical skills designed for today's career environment and workplace demands.</p>
-                        </div>
-                        <button onclick="openEnquireModal()" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-semibold">
-                            Enquire Now
-                        </button>
-                    </div>
+            <div class="courses-grid">
+                <div class="course-card reveal reveal-delay-1">
+                    <div class="course-icon blue"><i class="fas fa-briefcase"></i></div>
+                    <span class="course-tag">Modular Training</span>
+                    <h3>Professional Skill Training</h3>
+                    <p>Develop practical skills designed for today's competitive career environment with focused instruction.</p>
+                    <a href="#" class="course-link" onclick="openModal(); return false;">Enquire Now <i class="fas fa-arrow-right"></i></a>
                 </div>
-
-                <!-- Course Card 2 -->
-                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.1s;">
-                    <div class="glass-card p-4 rounded-3 h-100 hover-lift d-flex flex-column justify-content-between border border-slate-100 shadow-sm">
-                        <div>
-                            <div class="bg-cyan-100 text-cyan-700 p-3 rounded-2 d-inline-block mb-3">
-                                <i data-lucide="target" class="w-6 h-6"></i>
-                            </div>
-                            <h4 class="fw-bold text-slate-900 fs-5 mb-2">Career-Focused Learning</h4>
-                            <p class="text-slate-600 text-sm mb-4">Build knowledge and confidence that can help you move toward your personal career goals.</p>
-                        </div>
-                        <button onclick="openEnquireModal()" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-semibold">
-                            Enquire Now
-                        </button>
-                    </div>
+                <div class="course-card reveal reveal-delay-2">
+                    <div class="course-icon amber"><i class="fas fa-bullseye"></i></div>
+                    <span class="course-tag">Goal Oriented</span>
+                    <h3>Career-Focused Learning</h3>
+                    <p>Build knowledge and confidence that can help you move toward your professional career goals effectively.</p>
+                    <a href="#" class="course-link" onclick="openModal(); return false;">Enquire Now <i class="fas fa-arrow-right"></i></a>
                 </div>
-
-                <!-- Course Card 3 -->
-                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.2s;">
-                    <div class="glass-card p-4 rounded-3 h-100 hover-lift d-flex flex-column justify-content-between border border-slate-100 shadow-sm">
-                        <div>
-                            <div class="bg-amber-100 text-amber-700 p-3 rounded-2 d-inline-block mb-3">
-                                <i data-lucide="cpu" class="w-6 h-6"></i>
-                            </div>
-                            <h4 class="fw-bold text-slate-900 fs-5 mb-2">Practical Learning</h4>
-                            <p class="text-slate-600 text-sm mb-4">Focus on useful, application-oriented learning instead of theoretical knowledge alone.</p>
-                        </div>
-                        <button onclick="openEnquireModal()" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-semibold">
-                            Enquire Now
-                        </button>
-                    </div>
+                <div class="course-card reveal reveal-delay-3">
+                    <div class="course-icon green"><i class="fas fa-hands-helping"></i></div>
+                    <span class="course-tag">Hands-on Tasks</span>
+                    <h3>Practical Learning</h3>
+                    <p>Focus on useful, application-oriented learning experiences instead of relying on theory alone.</p>
+                    <a href="#" class="course-link" onclick="openModal(); return false;">Enquire Now <i class="fas fa-arrow-right"></i></a>
                 </div>
-
-                <!-- Course Card 4 -->
-                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.3s;">
-                    <div class="glass-card p-4 rounded-3 h-100 hover-lift d-flex flex-column justify-content-between border border-slate-100 shadow-sm">
-                        <div>
-                            <div class="bg-indigo-100 text-indigo-700 p-3 rounded-2 d-inline-block mb-3">
-                                <i data-lucide="trending-up" class="w-6 h-6"></i>
-                            </div>
-                            <h4 class="fw-bold text-slate-900 fs-5 mb-2">Skill Development Programs</h4>
-                            <p class="text-slate-600 text-sm mb-4">Structured learning designed around developing valuable, market-ready skills.</p>
-                        </div>
-                        <button onclick="openEnquireModal()" class="btn btn-sm btn-outline-primary w-100 rounded-pill fw-semibold">
-                            Enquire Now
-                        </button>
-                    </div>
+                <div class="course-card reveal reveal-delay-4">
+                    <div class="course-icon purple"><i class="fas fa-graduation-cap"></i></div>
+                    <span class="course-tag">Structured Path</span>
+                    <h3>Skill Development Programs</h3>
+                    <p>Structured learning programs designed around developing valuable competencies for modern learners.</p>
+                    <a href="#" class="course-link" onclick="openModal(); return false;">Enquire Now <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Why Choose Us -->
-    <section id="why-us" class="py-5 py-lg-7 bg-slate-50">
-        <div class="container py-4">
-            <div class="text-center max-w-2xl mx-auto mb-5 reveal">
-                <span class="badge bg-blue-100 text-primary px-3 py-1 rounded-pill fw-semibold mb-2">Our Advantages</span>
-                <h2 class="display-6 fw-bold text-slate-900 mb-3">Why Choose Learnet Institute of Skills?</h2>
-                <p class="text-slate-600">Discover what makes our training approach trusted by learners in Ranaghat.</p>
+    <section class="section section-alt" id="why-us">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge">The Learnet Advantage</div>
+                <h2 class="section-title">Why Choose Learnet Institute of Skills?</h2>
+                <p class="section-desc">We provide a supportive, practical learning environment built around student success.</p>
             </div>
-
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4 reveal">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
-                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
-                            <i data-lucide="check-circle" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Practical Learning</h4>
-                        <p class="text-slate-600 text-sm mb-0">Focus on skills that can be applied directly in real-world scenarios.</p>
-                    </div>
+            <div class="advantages-grid">
+                <div class="advantage-card reveal reveal-delay-1">
+                    <div class="advantage-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Practical Learning</h3>
+                    <p>Focus on skills that can be applied directly in real-world situations, building confidence.</p>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.1s;">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
-                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
-                            <i data-lucide="users" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Experienced Guidance</h4>
-                        <p class="text-slate-600 text-sm mb-0">Learn with structured guidance and supportive mentorship.</p>
-                    </div>
+                <div class="advantage-card reveal reveal-delay-2">
+                    <div class="advantage-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Experienced Guidance</h3>
+                    <p>Learn with structured guidance and dedicated support from experienced educators.</p>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.2s;">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
-                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
-                            <i data-lucide="heart" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Student-Focused Approach</h4>
-                        <p class="text-slate-600 text-sm mb-0">Learning designed around student development and comprehension.</p>
-                    </div>
+                <div class="advantage-card reveal reveal-delay-3">
+                    <div class="advantage-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Student-Focused Approach</h3>
+                    <p>Every program is designed around individual student development and pace.</p>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.3s;">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
-                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
-                            <i data-lucide="award" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Career-Oriented Skills</h4>
-                        <p class="text-slate-600 text-sm mb-0">Develop useful skills that support future career opportunities.</p>
-                    </div>
+                <div class="advantage-card reveal reveal-delay-1">
+                    <div class="advantage-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Career-Oriented Skills</h3>
+                    <p>Develop useful skills and professional competencies that strongly support your future career.</p>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.4s;">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
-                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
-                            <i data-lucide="shield" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Supportive Environment</h4>
-                        <p class="text-slate-600 text-sm mb-0">Create a comfortable environment for learning and growth.</p>
-                    </div>
+                <div class="advantage-card reveal reveal-delay-2">
+                    <div class="advantage-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Supportive Environment</h3>
+                    <p>A comfortable, encouraging environment designed for continuous learning and success.</p>
                 </div>
-                <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.5s;">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 hover-lift border border-slate-100">
-                        <div class="text-primary bg-primary/10 p-3 rounded-2 d-inline-block mb-3">
-                            <i data-lucide="zap" class="w-6 h-6"></i>
-                        </div>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Modern Learning</h4>
-                        <p class="text-slate-600 text-sm mb-0">A contemporary approach to skill enhancement and training.</p>
-                    </div>
+                <div class="advantage-card reveal reveal-delay-3">
+                    <div class="advantage-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Modern Learning</h3>
+                    <p>A contemporary, fresh approach to skill development tailored for today's dynamic world.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Learning Experience Section -->
-    <section class="py-5 py-lg-7 bg-white">
-        <div class="container py-4">
-            <div class="text-center max-w-2xl mx-auto mb-5 reveal">
-                <span class="badge bg-blue-100 text-primary px-3 py-1 rounded-pill fw-semibold mb-2">Step-by-Step Pathway</span>
-                <h2 class="display-6 fw-bold text-slate-900 mb-3">The Learning Experience at Learnet Skills</h2>
-                <p class="text-slate-600">A structured 4-step pathway designed to take you from fundamentals to career readiness.</p>
+    <!-- Journey -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge">Your Journey</div>
+                <h2 class="section-title">The Learning Experience at Learnet Skills</h2>
+                <p class="section-desc">A structured 4-step pathway designed to take you from fundamentals to career readiness.</p>
             </div>
-
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3 reveal">
-                    <div class="p-4 rounded-3 bg-slate-50 border border-slate-100 h-100 relative">
-                        <span class="text-primary fw-extrabold fs-2 opacity-25 d-block mb-2">01</span>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Learn</h4>
-                        <p class="text-slate-600 text-sm mb-0">Understand the fundamentals with structured guidance from mentors.</p>
-                    </div>
+            <div class="journey-steps">
+                <div class="step reveal reveal-delay-1">
+                    <div class="step-number">01</div>
+                    <h3>Learn</h3>
+                    <p>Understand the fundamentals thoroughly with structured guidance.</p>
                 </div>
-                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.1s;">
-                    <div class="p-4 rounded-3 bg-slate-50 border border-slate-100 h-100 relative">
-                        <span class="text-primary fw-extrabold fs-2 opacity-25 d-block mb-2">02</span>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Practice</h4>
-                        <p class="text-slate-600 text-sm mb-0">Apply what you learn through practical activities and exercises.</p>
-                    </div>
+                <div class="step reveal reveal-delay-2">
+                    <div class="step-number">02</div>
+                    <h3>Practice</h3>
+                    <p>Apply what you learn through practical activities and tasks.</p>
                 </div>
-                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.2s;">
-                    <div class="p-4 rounded-3 bg-slate-50 border border-slate-100 h-100 relative">
-                        <span class="text-primary fw-extrabold fs-2 opacity-25 d-block mb-2">03</span>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Improve</h4>
-                        <p class="text-slate-600 text-sm mb-0">Build confidence through continuous learning and feedback.</p>
-                    </div>
+                <div class="step reveal reveal-delay-3">
+                    <div class="step-number">03</div>
+                    <h3>Improve</h3>
+                    <p>Build confidence and proficiency through continuous feedback.</p>
                 </div>
-                <div class="col-md-6 col-lg-3 reveal" style="transition-delay: 0.3s;">
-                    <div class="p-4 rounded-3 bg-slate-50 border border-slate-100 h-100 relative">
-                        <span class="text-primary fw-extrabold fs-2 opacity-25 d-block mb-2">04</span>
-                        <h4 class="fw-bold text-slate-900 fs-5 mb-2">Grow</h4>
-                        <p class="text-slate-600 text-sm mb-0">Use your newly developed skills to move toward your career goals.</p>
-                    </div>
+                <div class="step reveal reveal-delay-4">
+                    <div class="step-number">04</div>
+                    <h3>Grow</h3>
+                    <p>Use your newly developed skills to move toward your career goals.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="reviews" class="py-5 py-lg-7 bg-slate-50">
-        <div class="container py-4">
-            <div class="text-center max-w-2xl mx-auto mb-5 reveal">
-                <div class="d-inline-flex align-items-center gap-1 bg-amber-100 text-amber-800 px-3 py-1 rounded-pill fw-semibold mb-2 text-sm">
-                    ⭐ 4.9 / 5 Rating (72 Reviews)
-                </div>
-                <h2 class="display-6 fw-bold text-slate-900 mb-3">What Students Say</h2>
-                <p class="text-slate-600">Hear from learners who have experienced our training environment.</p>
+    <!-- Testimonials -->
+    <section class="section section-alt" id="reviews">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge">Student Testimonials</div>
+                <h2 class="section-title">Trusted by Learners in Ranaghat</h2>
+                <p class="section-desc">4.9 Based on 72 Google Reviews. Read what our students have to say about their learning experience.</p>
             </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal reveal-delay-1">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">A</div>
+                        <div class="testimonial-info">
+                            <h4>Anirban Roy</h4>
+                            <p>Ranaghat Student</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">The practical training approach and supportive guidance at Learnet Institute of Skills made all the difference for my learning confidence. Highly recommended!</p>
+                </div>
+                <div class="testimonial-card reveal reveal-delay-2">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">P</div>
+                        <div class="testimonial-info">
+                            <h4>Priyanka Biswas</h4>
+                            <p>Trainee</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Very professional environment near Surendra Cinema Hall. The teachers are extremely helpful and focus genuinely on skill development.</p>
+                </div>
+                <div class="testimonial-card reveal reveal-delay-3">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-info">
+                            <h4>Subham Ghosh</h4>
+                            <p>Skill Development Student</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Great coaching institute with modern teaching methods and excellent focus on career-oriented practical skills. Outstanding faculty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="row g-4">
-                <div class="col-md-4 reveal">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 border border-slate-100 d-flex flex-column justify-content-between">
+    <!-- Contact -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-badge">Get In Touch</div>
+                <h2 class="section-title">Connect With Learnet Ranaghat</h2>
+                <p class="section-desc">Have questions about our training programs or location? Reach out to us today.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Contact Information</h3>
+                    <p>Fill out the form and our counselor will get back to you with complete details.</p>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
                         <div>
-                            <div class="text-amber-500 mb-3">★★★★★</div>
-                            <p class="text-slate-700 italic text-sm mb-4">"The practical approach to training here really helped me understand concepts clearly and build confidence."</p>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 pt-3 border-top border-slate-100">
-                            <div class="bg-primary/10 text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">S</div>
-                            <div>
-                                <h6 class="fw-bold mb-0 text-sm">Student Review</h6>
-                                <small class="text-slate-500">Learnet Skills Ranaghat</small>
-                            </div>
+                            <h4>Phone Number</h4>
+                            <a href="tel:7699038813">7699038813</a>
+                            <p>Available for calls & WhatsApp</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-4 reveal" style="transition-delay: 0.1s;">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 border border-slate-100 d-flex flex-column justify-content-between">
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
-                            <div class="text-amber-500 mb-3">★★★★★</div>
-                            <p class="text-slate-700 italic text-sm mb-4">"Very supportive environment and structured guidance. Ideal place for skill development in Ranaghat."</p>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 pt-3 border-top border-slate-100">
-                            <div class="bg-primary/10 text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">A</div>
-                            <div>
-                                <h6 class="fw-bold mb-0 text-sm">Student Review</h6>
-                                <small class="text-slate-500">Learnet Skills Ranaghat</small>
-                            </div>
+                            <h4>Institute Location</h4>
+                            <p>Ranaghat, Near Surendra Cinema Hall,<br>Ranaghat, India — 741201</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
-                    <div class="bg-white p-4 rounded-3 shadow-sm h-100 border border-slate-100 d-flex flex-column justify-content-between">
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-share-alt"></i></div>
                         <div>
-                            <div class="text-amber-500 mb-3">★★★★★</div>
-                            <p class="text-slate-700 italic text-sm mb-4">"Great focus on practical learning and professional skills. Highly recommended for career-oriented training."</p>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 pt-3 border-top border-slate-100">
-                            <div class="bg-primary/10 text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">R</div>
-                            <div>
-                                <h6 class="fw-bold mb-0 text-sm">Student Review</h6>
-                                <small class="text-slate-500">Learnet Skills Ranaghat</small>
-                            </div>
+                            <h4>Connect on Social Media</h4>
+                            <p>Follow us for updates and tips</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Banner -->
-    <section class="py-5 bg-gradient-to-r from-primary to-cyan-600 text-white">
-        <div class="container py-4 text-center reveal">
-            <h2 class="display-6 fw-bold mb-3">Ready to Build Your Skills?</h2>
-            <p class="fs-5 opacity-90 max-w-xl mx-auto mb-4">Take the next step toward learning practical skills and building a stronger future.</p>
-            <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <button onclick="openEnquireModal()" class="btn btn-white text-primary btn-lg rounded-pill px-4 fw-bold shadow-lg">
-                    Enquire Now
-                </button>
-                <a href="tel:7699038813" class="btn btn-outline-light btn-lg rounded-pill px-4 fw-bold">
-                    Call 7699038813
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-5 py-lg-7 bg-white">
-        <div class="container py-4">
-            <div class="row g-5">
-                <div class="col-lg-6 reveal">
-                    <span class="badge bg-blue-100 text-primary px-3 py-1 rounded-pill fw-semibold mb-2">Get In Touch</span>
-                    <h2 class="display-6 fw-bold text-slate-900 mb-3">Visit Us or Send an Enquiry</h2>
-                    <p class="text-slate-600 mb-4">Have questions about our training programs? Reach out to us or drop by our institute in Ranaghat.</p>
-
-                    <div class="space-y-4 mb-4">
-                        <div class="d-flex align-items-start gap-3 mb-3">
-                            <div class="bg-primary/10 text-primary p-3 rounded-2">
-                                <i data-lucide="phone" class="w-6 h-6"></i>
+                <div class="contact-form reveal reveal-delay-2">
+                    <h3>Send an Enquiry</h3>
+                    <p>Fill out the form below and our counselor will get back to you with complete details.</p>
+                    <form id="contactForm" onsubmit="submitForm(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Full Name *</label>
+                                <input type="text" placeholder="Enter your name" required>
                             </div>
-                            <div>
-                                <h6 class="fw-bold text-slate-900 mb-1">Phone Number</h6>
-                                <a href="tel:7699038813" class="text-primary fw-bold text-decoration-none fs-5">7699038813</a>
+                            <div class="form-group">
+                                <label>Phone Number *</label>
+                                <input type="tel" placeholder="Enter phone number" required>
                             </div>
                         </div>
-
-                        <div class="d-flex align-items-start gap-3 mb-3">
-                            <div class="bg-primary/10 text-primary p-3 rounded-2">
-                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="Enter your email">
                             </div>
-                            <div>
-                                <h6 class="fw-bold text-slate-900 mb-1">Location</h6>
-                                <p class="text-slate-600 mb-0">Ranaghat, Near Surendra Cinema Hall, Ranaghat, India, 741201</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Social Media Links -->
-                    <div class="pt-3 border-top border-slate-100">
-                        <h6 class="fw-bold text-slate-900 mb-3">Connect on Social Media</h6>
-                        <div class="d-flex gap-3">
-                            <a href="https://www.instagram.com/learnetskills/" target="_blank" class="btn btn-light border text-slate-700 rounded-pill px-3 py-2 d-flex align-items-center gap-2 text-sm fw-semibold hover:bg-slate-100 transition">
-                                <i data-lucide="instagram" class="w-4 h-4 text-pink-600"></i> Instagram
-                            </a>
-                            <a href="https://www.facebook.com/LearnetSkills" target="_blank" class="btn btn-light border text-slate-700 rounded-pill px-3 py-2 d-flex align-items-center gap-2 text-sm fw-semibold hover:bg-slate-100 transition">
-                                <i data-lucide="facebook" class="w-4 h-4 text-blue-600"></i> Facebook
-                            </a>
-                            <a href="https://twitter.com/learnetskills" target="_blank" class="btn btn-light border text-slate-700 rounded-pill px-3 py-2 d-flex align-items-center gap-2 text-sm fw-semibold hover:bg-slate-100 transition">
-                                <i data-lucide="twitter" class="w-4 h-4 text-sky-500"></i> Twitter/X
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 reveal" style="transition-delay: 0.2s;">
-                    <div class="bg-slate-50 p-4 p-lg-5 rounded-3 border border-slate-200 shadow-sm">
-                        <h3 class="fw-bold text-slate-900 fs-4 mb-3">Send Quick Enquiry</h3>
-                        <form id="contactForm" onsubmit="handleFormSubmit(event)">
-                            <div class="mb-3">
-                                <label class="form-label text-sm fw-semibold text-slate-700">Full Name</label>
-                                <input type="text" class="form-control rounded-2 py-2.5" id="name" required placeholder="Enter your name">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-sm fw-semibold text-slate-700">Phone Number</label>
-                                <input type="tel" class="form-control rounded-2 py-2.5" id="phone" required placeholder="Enter phone number">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-sm fw-semibold text-slate-700">Email Address</label>
-                                <input type="email" class="form-control rounded-2 py-2.5" id="email" placeholder="Enter email address">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-sm fw-semibold text-slate-700">Interested Program</label>
-                                <select class="form-select rounded-2 py-2.5" id="course">
-                                    <option value="Professional Skill Training">Professional Skill Training</option>
-                                    <option value="Career-Focused Learning">Career-Focused Learning</option>
-                                    <option value="Practical Learning">Practical Learning</option>
-                                    <option value="Skill Development Programs">Skill Development Programs</option>
+                            <div class="form-group">
+                                <label>Interested Course</label>
+                                <select>
+                                    <option>General Enquiry</option>
+                                    <option>Professional Skill Training</option>
+                                    <option>Career-Focused Learning</option>
+                                    <option>Practical Learning</option>
+                                    <option>Skill Development Programs</option>
                                 </select>
                             </div>
-                            <div class="mb-4">
-                                <label class="form-label text-sm fw-semibold text-slate-700">Message / Query</label>
-                                <textarea class="form-control rounded-2 py-2" id="message" rows="3" placeholder="Write your message..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100 rounded-2 py-3 fw-semibold shadow-md">
-                                Send Enquiry
-                            </button>
-                        </form>
-                        <div id="formSuccess" class="alert alert-success mt-3 d-none text-center" role="alert">
-                            Thank you! Your enquiry has been received successfully. We will contact you soon.
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label>Your Message</label>
+                            <textarea placeholder="Write your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            Send Enquiry <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Google Map / Location Section -->
-    <section class="py-4 bg-slate-50 border-top">
-        <div class="container">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold text-slate-900">Find Us in Ranaghat</h3>
-                <p class="text-slate-600 text-sm">Near Surendra Cinema Hall, Ranaghat, India, 741201</p>
-            </div>
-            <div class="rounded-3 overflow-hidden shadow-sm border" style="height: 350px;">
-                <iframe width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.857039783853!2d88.5645!3d23.1752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8e79b00000001%3A0x1!2sRanaghat%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1650000000000"></iframe>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white pt-5 pb-4">
-        <div class="container py-4">
-            <div class="row g-4 mb-5">
-                <div class="col-lg-4">
-                    <div class="d-flex align-items-center gap-2 mb-3">
-                        <div class="bg-primary text-white p-2 rounded-xl fw-bold d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
-                            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="display: flex; align-items: center; gap: 10px;">
+                        <div class="logo-icon" style="width: 32px; height: 32px; font-size: 14px;">
+                            <i class="fas fa-graduation-cap"></i>
                         </div>
-                        <span class="fw-bold fs-5 text-white">Learnet Institute of Skills Ranaghat</span>
-                    </div>
-                    <p class="text-slate-400 text-sm mb-4 leading-relaxed">
-                        Empowering students and learners with practical, career-focused skill development and professional training in Ranaghat.
-                    </p>
-                    <div class="d-flex gap-2">
-                        <a href="https://www.instagram.com/learnetskills/" target="_blank" class="btn btn-dark btn-sm rounded-circle p-2 border border-slate-700 text-white hover:bg-primary"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-                        <a href="https://www.facebook.com/LearnetSkills" target="_blank" class="btn btn-dark btn-sm rounded-circle p-2 border border-slate-700 text-white hover:bg-primary"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-                        <a href="https://twitter.com/learnetskills" target="_blank" class="btn btn-dark btn-sm rounded-circle p-2 border border-slate-700 text-white hover:bg-primary"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-                    </div>
+                        Learnet Skills Ranaghat
+                    </h4>
+                    <p>Learnet Institute of Skills Ranaghat provides practical, career-focused skill development and professional training in Ranaghat, West Bengal.</p>
                 </div>
-
-                <div class="col-6 col-lg-2">
-                    <h6 class="fw-bold text-white mb-3 uppercase tracking-wider text-xs">Quick Links</h6>
-                    <ul class="list-unstyled space-y-2">
-                        <li><a href="#home" class="text-slate-400 hover:text-white text-sm text-decoration-none">Home</a></li>
-                        <li><a href="#about" class="text-slate-400 hover:text-white text-sm text-decoration-none">About</a></li>
-                        <li><a href="#courses" class="text-slate-400 hover:text-white text-sm text-decoration-none">Courses</a></li>
-                        <li><a href="#why-us" class="text-slate-400 hover:text-white text-sm text-decoration-none">Why Choose Us</a></li>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> About Us</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Courses</a></li>
+                        <li><a href="#why-us"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Why Choose Us</a></li>
+                        <li><a href="#reviews"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Reviews</a></li>
                     </ul>
                 </div>
-
-                <div class="col-6 col-lg-2">
-                    <h6 class="fw-bold text-white mb-3 uppercase tracking-wider text-xs">Support</h6>
-                    <ul class="list-unstyled space-y-2">
-                        <li><a href="#reviews" class="text-slate-400 hover:text-white text-sm text-decoration-none">Reviews</a></li>
-                        <li><a href="#contact" class="text-slate-400 hover:text-white text-sm text-decoration-none">Contact Us</a></li>
-                        <li><a href="#" onclick="openEnquireModal(); return false;" class="text-slate-400 hover:text-white text-sm text-decoration-none">Enquire Now</a></li>
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="#courses"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Skill Training</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Career Learning</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Practical Learning</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Skill Development</a></li>
                     </ul>
                 </div>
-
-                <div class="col-lg-4">
-                    <h6 class="fw-bold text-white mb-3 uppercase tracking-wider text-xs">Contact Info</h6>
-                    <p class="text-slate-400 text-sm mb-2 d-flex align-items-center gap-2">
-                        <i data-lucide="phone" class="w-4 h-4 text-primary"></i> <a href="tel:7699038813" class="text-slate-300 text-decoration-none">7699038813</a>
-                    </p>
-                    <p class="text-slate-400 text-sm mb-0 d-flex align-items-start gap-2">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-primary mt-1 flex-shrink-0"></i> Near Surendra Cinema Hall, Ranaghat, India — 741201
-                    </p>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt" style="font-size: 12px; color: var(--primary);"></i> Ranaghat, Near Surendra Cinema Hall, 741201</a></li>
+                        <li><a href="tel:7699038813"><i class="fas fa-phone" style="font-size: 12px; color: var(--primary);"></i> 7699038813</a></li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="pt-4 border-top border-slate-800 text-center text-slate-500 text-sm">
-                <p class="mb-0">© 2026 Learnet Institute of Skills Ranaghat. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>© 2026 Learnet Institute of Skills Ranaghat. All rights reserved.</p>
+                <p>
+                    <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a>
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Mobile Bottom Action Bar -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-3 d-flex d-md-none justify-content-around align-items-center z-50 shadow-lg">
-        <a href="tel:7699038813" class="btn btn-outline-primary btn-sm rounded-pill px-4 fw-semibold d-flex align-items-center gap-2">
-            <i data-lucide="phone" class="w-4 h-4"></i> Call Now
-        </a>
-        <button onclick="openEnquireModal()" class="btn btn-primary btn-sm rounded-pill px-4 fw-semibold d-flex align-items-center gap-2 shadow-sm">
-            <i data-lucide="message-square" class="w-4 h-4"></i> Enquire Now
-        </button>
-    </div>
-
-    <!-- Enquiry Modal -->
-    <div class="modal fade" id="enquireModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-3 border-0 shadow-lg">
-                <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold text-slate-900">Enquire at Learnet Skills</h5>
-                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Modal -->
+    <div class="modal-overlay" id="enquiryModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3>Enquire About Training</h3>
+            <form onsubmit="submitModalForm(event)">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" placeholder="Enter your name" required>
                 </div>
-                <div class="modal-body pt-3">
-                    <form id="modalForm" onsubmit="handleModalSubmit(event)">
-                        <div class="mb-3">
-                            <label class="form-label text-sm fw-semibold text-slate-700">Full Name</label>
-                            <input type="text" class="form-control rounded-2 py-2" id="modalName" required placeholder="Enter your name">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label text-sm fw-semibold text-slate-700">Phone Number</label>
-                            <input type="tel" class="form-control rounded-2 py-2" id="modalPhone" required placeholder="Enter phone number">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label text-sm fw-semibold text-slate-700">Interested Course</label>
-                            <select class="form-select rounded-2 py-2" id="modalCourse">
-                                <option value="Professional Skill Training">Professional Skill Training</option>
-                                <option value="Career-Focused Learning">Career-Focused Learning</option>
-                                <option value="Practical Learning">Practical Learning</option>
-                                <option value="Skill Development Programs">Skill Development Programs</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 rounded-2 py-2.5 fw-semibold shadow-sm">
-                            Submit Enquiry
-                        </button>
-                    </form>
-                    <div id="modalSuccess" class="alert alert-success mt-3 d-none text-center text-sm" role="alert">
-                        Enquiry submitted successfully! We will contact you soon.
-                    </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" placeholder="Enter your phone" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>Email (Optional)</label>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Course</label>
+                    <select>
+                        <option>General</option>
+                        <option>Professional Skill Training</option>
+                        <option>Career-Focused Learning</option>
+                        <option>Practical Learning</option>
+                        <option>Skill Development Programs</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Submit Enquiry <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
 
-        // Scroll Reveal Observer (Fixes blank section issue completely)
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+        // Mobile menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal').forEach(el => {
-                observer.observe(el);
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
             });
         });
 
-        // Three.js Background Animation
-        const canvas = document.getElementById('hero-canvas');
-        if (canvas) {
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        // Modal
+        function openModal() {
+            document.getElementById('enquiryModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('enquiryModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        window.onclick = function(event) {
+            let modal = document.getElementById('enquiryModal');
+            if (event.target == modal) closeModal();
+        }
 
-            // Particles Geometry
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 700;
-            const posArray = new Float32Array(particlesCount * 3);
+        // Forms
+        function submitForm(e) {
+            e.preventDefault();
+            alert('✅ Enquiry submitted successfully! Our counselor will get back to you shortly.');
+            e.target.reset();
+        }
+        function submitModalForm(e) {
+            e.preventDefault();
+            alert('✅ Enquiry submitted successfully!');
+            closeModal();
+            e.target.reset();
+        }
 
-            for(let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 12;
-            }
-
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-            // Material
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.035,
-                color: 0x1D4ED8,
-                transparent: true,
-                opacity: 0.7
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
             });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
 
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
-
-            camera.position.z = 3;
-
-            // Mouse interaction
-            let mouseX = 0;
-            let mouseY = 0;
-
-            window.addEventListener('mousemove', (event) => {
-                mouseX = event.clientX / window.innerWidth - 0.5;
-                mouseY = event.clientY / window.innerHeight - 0.5;
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
             });
-
-            // Animation Loop
-            const clock = new THREE.Clock();
-            function animate() {
-                requestAnimationFrame(animate);
-                const elapsedTime = clock.getElapsedTime();
-
-                particlesMesh.rotation.y = elapsedTime * 0.05 + mouseX * 0.3;
-                particlesMesh.rotation.x = elapsedTime * 0.03 + mouseY * 0.3;
-
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            // Resize Handler
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-
-        // Modal Handler Functions
-        function openEnquireModal() {
-            const modalElement = document.getElementById('enquireModal');
-            if (modalElement) {
-                const modal = new bootstrap.Modal(modalElement);
-                modal.show();
-            }
-        }
-
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            document.getElementById('formSuccess').classList.remove('d-none');
-            document.getElementById('contactForm').reset();
-            setTimeout(() => {
-                document.getElementById('formSuccess').classList.add('d-none');
-            }, 5000);
-        }
-
-        function handleModalSubmit(event) {
-            event.preventDefault();
-            document.getElementById('modalSuccess').classList.remove('d-none');
-            document.getElementById('modalForm').reset();
-            setTimeout(() => {
-                document.getElementById('modalSuccess').classList.add('d-none');
-                const modalEl = document.getElementById('enquireModal');
-                const modal = bootstrap.Modal.getInstance(modalEl);
-                if (modal) modal.hide();
-            }, 3000);
-        }
+        });
     </script>
 </body>
 </html>
